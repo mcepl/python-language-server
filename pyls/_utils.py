@@ -21,6 +21,7 @@ log = logging.getLogger(__name__)
 
 def debounce(interval_s, keyed_by=None):
     """Debounce calls to this function until interval_s seconds have passed."""
+
     def wrapper(func):
         timers = {}
         lock = threading.Lock()
@@ -43,7 +44,9 @@ def debounce(interval_s, keyed_by=None):
                 timer = threading.Timer(interval_s, run)
                 timers[key] = timer
                 timer.start()
+
         return debounced
+
     return wrapper
 
 
@@ -73,7 +76,9 @@ def find_parents(root, path, names):
     # Search each of /a/b/c, /a/b, /a
     while dirs:
         search_dir = os.path.join(*dirs)
-        existing = list(filter(os.path.exists, [os.path.join(search_dir, n) for n in names]))
+        existing = list(
+            filter(os.path.exists, [os.path.join(search_dir, n) for n in names])
+        )
         if existing:
             return existing
         dirs.pop()
@@ -127,6 +132,7 @@ def merge_dicts(dict_a, dict_b):
 
     If override_nones is True, then
     """
+
     def _merge_dicts_(a, b):
         for key in set(a.keys()).union(b.keys()):
             if key in a and key in b:
@@ -140,6 +146,7 @@ def merge_dicts(dict_a, dict_b):
                 yield (key, a[key])
             elif b[key] is not None:
                 yield (key, b[key])
+
     return dict(_merge_dicts_(dict_a, dict_b))
 
 
@@ -149,8 +156,10 @@ def format_docstring(contents):
     Until we can find a fast enough way of discovering and parsing each format,
     we can do a little better by at least preserving indentation.
     """
-    contents = contents.replace('\t', u'\u00A0' * 4)
-    contents = contents.replace('  ', u'\u00A0' * 2)
+    contents = contents.replace("\t", u"\u00A0" * 4)
+    contents = contents.replace("  ", u"\u00A0" * 2)
+    if LooseVersion(JEDI_VERSION) < LooseVersion("0.15.0"):
+        contents = contents.replace("*", "\\*")
     return contents
 
 
@@ -204,6 +213,7 @@ if os.name == 'nt':
             kernel32.CloseHandle(process)
             return True
         return False
+
 
 else:
     import errno

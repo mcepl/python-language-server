@@ -23,40 +23,40 @@ def test_pycodestyle(workspace):
     doc = Document(DOC_URI, workspace, DOC)
     diags = pycodestyle_lint.pyls_lint(workspace, doc)
 
-    assert all([d['source'] == 'pycodestyle' for d in diags])
+    assert all([d["source"] == "pycodestyle" for d in diags])
 
     # One we're expecting is:
-    msg = 'W191 indentation contains tabs'
-    mod_import = [d for d in diags if d['message'] == msg][0]
+    msg = "W191 indentation contains tabs"
+    mod_import = [d for d in diags if d["message"] == msg][0]
 
-    assert mod_import['code'] == 'W191'
-    assert mod_import['severity'] == lsp.DiagnosticSeverity.Warning
-    assert mod_import['range']['start'] == {'line': 3, 'character': 0}
-    assert mod_import['range']['end'] == {'line': 3, 'character': 6}
+    assert mod_import["code"] == "W191"
+    assert mod_import["severity"] == lsp.DiagnosticSeverity.Warning
+    assert mod_import["range"]["start"] == {"line": 3, "character": 0}
+    assert mod_import["range"]["end"] == {"line": 3, "character": 6}
 
-    msg = 'W391 blank line at end of file'
-    mod_import = [d for d in diags if d['message'] == msg][0]
+    msg = "W391 blank line at end of file"
+    mod_import = [d for d in diags if d["message"] == msg][0]
 
-    assert mod_import['code'] == 'W391'
-    assert mod_import['severity'] == lsp.DiagnosticSeverity.Warning
-    assert mod_import['range']['start'] == {'line': 10, 'character': 0}
-    assert mod_import['range']['end'] == {'line': 10, 'character': 1}
+    assert mod_import["code"] == "W391"
+    assert mod_import["severity"] == lsp.DiagnosticSeverity.Warning
+    assert mod_import["range"]["start"] == {"line": 10, "character": 0}
+    assert mod_import["range"]["end"] == {"line": 10, "character": 1}
 
     msg = "E201 whitespace after '('"
-    mod_import = [d for d in diags if d['message'] == msg][0]
+    mod_import = [d for d in diags if d["message"] == msg][0]
 
-    assert mod_import['code'] == 'E201'
-    assert mod_import['severity'] == lsp.DiagnosticSeverity.Warning
-    assert mod_import['range']['start'] == {'line': 2, 'character': 10}
-    assert mod_import['range']['end'] == {'line': 2, 'character': 14}
+    assert mod_import["code"] == "E201"
+    assert mod_import["severity"] == lsp.DiagnosticSeverity.Warning
+    assert mod_import["range"]["start"] == {"line": 2, "character": 10}
+    assert mod_import["range"]["end"] == {"line": 2, "character": 14}
 
     msg = "E128 continuation line under-indented for visual indent"
-    mod_import = [d for d in diags if d['message'] == msg][0]
+    mod_import = [d for d in diags if d["message"] == msg][0]
 
-    assert mod_import['code'] == 'E128'
-    assert mod_import['severity'] == lsp.DiagnosticSeverity.Warning
-    assert mod_import['range']['start'] == {'line': 5, 'character': 1}
-    assert mod_import['range']['end'] == {'line': 5, 'character': 10}
+    assert mod_import["code"] == "E128"
+    assert mod_import["severity"] == lsp.DiagnosticSeverity.Warning
+    assert mod_import["range"]["start"] == {"line": 5, "character": 1}
+    assert mod_import["range"]["end"] == {"line": 5, "character": 10}
 
 
 def test_pycodestyle_config(workspace):
@@ -74,7 +74,7 @@ def test_pycodestyle_config(workspace):
     If any section called 'pycodestyle' exists that will be solely used
     and any config in a 'pep8' section will be ignored
     """
-    doc_uri = uris.from_fs_path(os.path.join(workspace.root_path, 'test.py'))
+    doc_uri = uris.from_fs_path(os.path.join(workspace.root_path, "test.py"))
     workspace.put_document(doc_uri, DOC)
     doc = workspace.get_document(doc_uri)
 
@@ -83,13 +83,13 @@ def test_pycodestyle_config(workspace):
     assert [d for d in diags if d['code'] == 'W191']
 
     content = {
-        'setup.cfg': ('[pycodestyle]\nignore = W191, E201, E128', True),
-        'tox.ini': ('', False)
+        "setup.cfg": ("[pycodestyle]\nignore = W191, E201, E128", True),
+        "tox.ini": ("", False),
     }
 
     for conf_file, (content, working) in list(content.items()):
         # Now we'll add config file to ignore it
-        with open(os.path.join(workspace.root_path, conf_file), 'w+') as f:
+        with open(os.path.join(workspace.root_path, conf_file), "w+") as f:
             f.write(content)
         workspace._config.settings.cache_clear()
 

@@ -21,6 +21,7 @@ def start_client(client):
 
 class _ClientServer(object):
     """ A class to setup a client/server pair """
+
     def __init__(self, check_parent_process=False):
         # Client to Server pipe
         csr, csw = os.pipe()
@@ -40,7 +41,9 @@ class _ClientServer(object):
         ))
         self.process.start()
 
-        self.client = PythonLanguageServer(os.fdopen(scr, 'rb'), os.fdopen(csw, 'wb'), start_io_lang_server)
+        self.client = PythonLanguageServer(
+            os.fdopen(scr, "rb"), os.fdopen(csw, "wb"), start_io_lang_server
+        )
         self.client_thread = Thread(target=start_client, args=[self.client])
         self.client_thread.daemon = True
         self.client_thread.start()
@@ -55,9 +58,11 @@ def client_server():
 
     yield client_server_pair.client
 
-    shutdown_response = client_server_pair.client._endpoint.request('shutdown').result(timeout=CALL_TIMEOUT)
+    shutdown_response = client_server_pair.client._endpoint.request("shutdown").result(
+        timeout=CALL_TIMEOUT
+    )
     assert shutdown_response is None
-    client_server_pair.client._endpoint.notify('exit')
+    client_server_pair.client._endpoint.notify("exit")
 
 
 @pytest.fixture
@@ -74,11 +79,11 @@ def client_exited_server():
 
 
 def test_initialize(client_server):  # pylint: disable=redefined-outer-name
-    response = client_server._endpoint.request('initialize', {
-        'rootPath': os.path.dirname(__file__),
-        'initializationOptions': {}
-    }).result(timeout=CALL_TIMEOUT)
-    assert 'capabilities' in response
+    response = client_server._endpoint.request(
+        "initialize",
+        {"rootPath": os.path.dirname(__file__), "initializationOptions": {}},
+    ).result(timeout=CALL_TIMEOUT)
+    assert "capabilities" in response
 
 
 @pytest.mark.skipif(os.name == 'nt' or (sys.platform.startswith('linux') and PY3),
@@ -87,11 +92,14 @@ def test_exit_with_parent_process_died(client_exited_server):  # pylint: disable
     # language server should have already exited before responding
     lsp_server, mock_process = client_exited_server.client, client_exited_server.process
     # with pytest.raises(Exception):
-    lsp_server._endpoint.request('initialize', {
-        'processId': mock_process.pid,
-        'rootPath': os.path.dirname(__file__),
-        'initializationOptions': {}
-    }).result(timeout=CALL_TIMEOUT)
+    lsp_server._endpoint.request(
+        "initialize",
+        {
+            "processId": mock_process.pid,
+            "rootPath": os.path.dirname(__file__),
+            "initializationOptions": {},
+        },
+    ).result(timeout=CALL_TIMEOUT)
 
     mock_process.terminate()
     time.sleep(CALL_TIMEOUT)
@@ -112,4 +120,4 @@ def test_not_exit_without_check_parent_process_flag(client_server):  # pylint: d
 @pytest.mark.skipif(bool(os.environ.get('CI')), reason='This test is hanging on CI')
 def test_missing_message(client_server):  # pylint: disable=redefined-outer-name
     with pytest.raises(JsonRpcMethodNotFound):
-        client_server._endpoint.request('unknown_method').result(timeout=CALL_TIMEOUT)
+        client_server._endpoint.request("unknown_method").result(timeout=CALL_TIMEOUT)

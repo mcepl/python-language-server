@@ -25,7 +25,7 @@ DOC_SYNTAX_ERR = """def hello()
 @contextlib.contextmanager
 def temp_document(doc_text, workspace):
     try:
-        temp_file = tempfile.NamedTemporaryFile(mode='w', delete=False)
+        temp_file = tempfile.NamedTemporaryFile(mode="w", delete=False)
         name = temp_file.name
         temp_file.write(doc_text)
         temp_file.close()
@@ -35,7 +35,7 @@ def temp_document(doc_text, workspace):
 
 
 def write_temp_doc(document, contents):
-    with open(document.path, 'w') as temp_file:
+    with open(document.path, "w") as temp_file:
         temp_file.write(contents)
 
 
@@ -43,11 +43,11 @@ def test_pylint(config, workspace):
     with temp_document(DOC, workspace) as doc:
         diags = pylint_lint.pyls_lint(config, doc, True)
 
-        msg = '[unused-import] Unused import sys'
-        unused_import = [d for d in diags if d['message'] == msg][0]
+        msg = "[unused-import] Unused import sys"
+        unused_import = [d for d in diags if d["message"] == msg][0]
 
-        assert unused_import['range']['start'] == {'line': 0, 'character': 0}
-        assert unused_import['severity'] == lsp.DiagnosticSeverity.Warning
+        assert unused_import["range"]["start"] == {"line": 0, "character": 0}
+        assert unused_import["severity"] == lsp.DiagnosticSeverity.Warning
 
         if IS_PY3:
             # test running pylint in stdin
@@ -69,10 +69,10 @@ def test_syntax_error_pylint_py3(config, workspace):
     with temp_document(DOC_SYNTAX_ERR, workspace) as doc:
         diag = pylint_lint.pyls_lint(config, doc, True)[0]
 
-        assert diag['message'].startswith('[syntax-error] invalid syntax')
+        assert diag["message"].startswith("[syntax-error] invalid syntax")
         # Pylint doesn't give column numbers for invalid syntax.
-        assert diag['range']['start'] == {'line': 0, 'character': 12}
-        assert diag['severity'] == lsp.DiagnosticSeverity.Error
+        assert diag["range"]["start"] == {"line": 0, "character": 12}
+        assert diag["severity"] == lsp.DiagnosticSeverity.Error
 
         # test running pylint in stdin
         config.plugin_settings('pylint')['executable'] = 'pylint'
@@ -89,10 +89,10 @@ def test_syntax_error_pylint_py2(config, workspace):
     with temp_document(DOC_SYNTAX_ERR, workspace) as doc:
         diag = pylint_lint.pyls_lint(config, doc, True)[0]
 
-        assert diag['message'].startswith('[syntax-error] invalid syntax')
+        assert diag["message"].startswith("[syntax-error] invalid syntax")
         # Pylint doesn't give column numbers for invalid syntax.
-        assert diag['range']['start'] == {'line': 0, 'character': 0}
-        assert diag['severity'] == lsp.DiagnosticSeverity.Error
+        assert diag["range"]["start"] == {"line": 0, "character": 0}
+        assert diag["severity"] == lsp.DiagnosticSeverity.Error
 
 
 def test_lint_free_pylint(config, workspace):
@@ -121,7 +121,7 @@ def test_lint_caching(workspace):
 
         # Fix lint errors and write the changes to disk. Run the linter in the
         # in-memory mode to check the cached diagnostic behavior.
-        write_temp_doc(doc, '')
+        write_temp_doc(doc, "")
         assert pylint_lint.PylintLinter.lint(doc, False, flags) == diags
 
         # Now check the on-disk behavior.

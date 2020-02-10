@@ -24,22 +24,22 @@ def test_format(workspace):
     res = pyls_format_document(doc)
 
     assert len(res) == 1
-    assert res[0]['newText'] == "A = ['h', 'w', 'a']\n\nB = ['h', 'w']\n"
+    assert res[0]["newText"] == "A = ['h', 'w', 'a']\n\nB = ['h', 'w']\n"
 
 
 def test_range_format(workspace):
     doc = Document(DOC_URI, workspace, DOC)
 
     def_range = {
-        'start': {'line': 0, 'character': 0},
-        'end': {'line': 4, 'character': 10}
+        "start": {"line": 0, "character": 0},
+        "end": {"line": 4, "character": 10},
     }
     res = pyls_format_range(doc, def_range)
 
     assert len(res) == 1
 
     # Make sure B is still badly formatted
-    assert res[0]['newText'] == "A = ['h', 'w', 'a']\n\nB = ['h',\n\n\n'w']\n"
+    assert res[0]["newText"] == "A = ['h', 'w', 'a']\n\nB = ['h',\n\n\n'w']\n"
 
 
 def test_no_change(workspace):
@@ -55,4 +55,7 @@ def test_config_file(tmpdir, workspace):
     doc = Document(uris.from_fs_path(src.strpath), workspace, DOC)
 
     # A was split on multiple lines because of column_limit from config file
-    assert pyls_format_document(doc)[0]['newText'] == "A = [\n    'h', 'w',\n    'a'\n]\n\nB = ['h', 'w']\n"
+    assert (
+        pyls_format_document(doc)[0]["newText"]
+        == "A = [\n    'h', 'w',\n    'a'\n]\n\nB = ['h', 'w']\n"
+    )

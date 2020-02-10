@@ -80,10 +80,11 @@ def pyls_document_symbols(config, document):
 def _include_def(definition):
     return (
         # Don't tend to include parameters as symbols
-        definition.type != 'param' and
+        definition.type != "param"
+        and
         # Unused vars should also be skipped
-        definition.name != '_' and
-        _kind(definition) is not None
+        definition.name != "_"
+        and _kind(definition) is not None
     )
 
 
@@ -107,8 +108,8 @@ def _range(definition):
     (start_line, start_column) = definition.start_pos
     (end_line, end_column) = definition.end_pos
     return {
-        'start': {'line': start_line - 1, 'character': start_column},
-        'end': {'line': end_line - 1, 'character': end_column}
+        "start": {"line": start_line - 1, "character": start_column},
+        "end": {"line": end_line - 1, "character": end_column},
     }
 
 

@@ -4,12 +4,12 @@ import sys
 import pluggy
 from ._version import get_versions
 
-__version__ = get_versions()['version']
+__version__ = get_versions()["version"]
 del get_versions
 
-PYLS = 'pyls'
+PYLS = "pyls"
 
 hookspec = pluggy.HookspecMarker(PYLS)
 hookimpl = pluggy.HookimplMarker(PYLS)
 
-IS_WIN = os.name == 'nt'
+IS_WIN = os.name == "nt"

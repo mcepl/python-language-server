@@ -44,10 +44,10 @@ _TYPE_MAP = {
 }
 
 # Types of parso nodes for which snippet is not included in the completion
-_IMPORTS = ('import_name', 'import_from')
+_IMPORTS = ("import_name", "import_from")
 
 # Types of parso node for errors
-_ERRORS = ('error_node', )
+_ERRORS = ("error_node",)
 
 
 @hookimpl
@@ -109,42 +109,43 @@ def use_snippets(document, position):
     This returns `False` if a completion is being requested on an import
     statement, `True` otherwise.
     """
-    line = position['line']
-    lines = document.source.split('\n', line)
-    act_lines = [lines[line][:position['character']]]
+    line = position["line"]
+    lines = document.source.split("\n", line)
+    act_lines = [lines[line][: position["character"]]]
     line -= 1
-    last_character = ''
+    last_character = ""
     while line > -1:
         act_line = lines[line]
-        if (act_line.rstrip().endswith('\\') or
-                act_line.rstrip().endswith('(') or
-                act_line.rstrip().endswith(',')):
+        if (
+            act_line.rstrip().endswith("\\")
+            or act_line.rstrip().endswith("(")
+            or act_line.rstrip().endswith(",")
+        ):
             act_lines.insert(0, act_line)
             line -= 1
-            if act_line.rstrip().endswith('('):
+            if act_line.rstrip().endswith("("):
                 # Needs to be added to the end of the code before parsing
                 # to make it valid, otherwise the node type could end
                 # being an 'error_node' for multi-line imports that use '('
-                last_character = ')'
+                last_character = ")"
         else:
             break
-    if '(' in act_lines[-1].strip():
-        last_character = ')'
-    code = '\n'.join(act_lines).split(';')[-1].strip() + last_character
+    if "(" in act_lines[-1].strip():
+        last_character = ")"
+    code = "\n".join(act_lines).split(";")[-1].strip() + last_character
     tokens = parso.parse(code)
     expr_type = tokens.children[0].type
-    return (expr_type not in _IMPORTS and
-            not (expr_type in _ERRORS and 'import' in code))
+    return expr_type not in _IMPORTS and not (expr_type in _ERRORS and "import" in code)
 
 
 def _format_completion(d, include_params=True):
     completion = {
-        'label': _label(d),
-        'kind': _TYPE_MAP.get(d.type),
-        'detail': _detail(d),
-        'documentation': _utils.format_docstring(d.docstring()),
-        'sortText': _sort_text(d),
-        'insertText': d.name
+        "label": _label(d),
+        "kind": _TYPE_MAP.get(d.type),
+        "detail": _detail(d),
+        "documentation": _utils.format_docstring(d.docstring()),
+        "sortText": _sort_text(d),
+        "insertText": d.name,
     }
 
     if d.type == 'path':
@@ -161,19 +162,19 @@ def _format_completion(d, include_params=True):
 
         if len(positional_args) > 1:
             # For completions with params, we can generate a snippet instead
-            completion['insertTextFormat'] = lsp.InsertTextFormat.Snippet
-            snippet = d.name + '('
+            completion["insertTextFormat"] = lsp.InsertTextFormat.Snippet
+            snippet = d.name + "("
             for i, param in enumerate(positional_args):
                 snippet += '${%s:%s}' % (i + 1, param.name)
                 if i < len(positional_args) - 1:
-                    snippet += ', '
-            snippet += ')$0'
-            completion['insertText'] = snippet
+                    snippet += ", "
+            snippet += ")$0"
+            completion["insertText"] = snippet
         elif len(positional_args) == 1:
             completion['insertTextFormat'] = lsp.InsertTextFormat.Snippet
             completion['insertText'] = d.name + '($0)'
         else:
-            completion['insertText'] = d.name + '()'
+            completion["insertText"] = d.name + "()"
 
     return completion
 
@@ -189,9 +190,9 @@ def _label(definition):
 
 def _detail(definition):
     try:
-        return definition.parent().full_name or ''
+        return definition.parent().full_name or ""
     except AttributeError:
-        return definition.full_name or ''
+        return definition.full_name or ""
 
 
 def _sort_text(definition):
@@ -200,5 +201,5 @@ def _sort_text(definition):
     """
 
     # If its 'hidden', put it next last
-    prefix = 'z{}' if definition.name.startswith('_') else 'a{}'
+    prefix = "z{}" if definition.name.startswith("_") else "a{}"
     return prefix.format(definition.name)

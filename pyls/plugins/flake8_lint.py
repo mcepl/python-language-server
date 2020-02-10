@@ -13,7 +13,7 @@ FIX_IGNORES_RE = re.compile(r'([^a-zA-Z0-9_,]*;.*(\W+||$))')
 @hookimpl
 def pyls_settings():
     # Default flake8 to disabled
-    return {'plugins': {'flake8': {'enabled': False}}}
+    return {"plugins": {"flake8": {"enabled": False}}}
 
 
 @hookimpl
@@ -23,13 +23,13 @@ def pyls_lint(workspace, document):
     log.debug("Got flake8 settings: %s", settings)
 
     opts = {
-        'config': settings.get('config'),
-        'exclude': settings.get('exclude'),
-        'filename': settings.get('filename'),
-        'hang-closing': settings.get('hangClosing'),
-        'ignore': settings.get('ignore'),
-        'max-line-length': settings.get('maxLineLength'),
-        'select': settings.get('select'),
+        "config": settings.get("config"),
+        "exclude": settings.get("exclude"),
+        "filename": settings.get("filename"),
+        "hang-closing": settings.get("hangClosing"),
+        "ignore": settings.get("ignore"),
+        "max-line-length": settings.get("maxLineLength"),
+        "select": settings.get("select"),
     }
 
     # flake takes only absolute path to the config. So we should check and
@@ -90,12 +90,12 @@ def build_args(options):
             continue
         arg = None
         if isinstance(arg_val, list):
-            arg = '--{}={}'.format(arg_name, ','.join(arg_val))
+            arg = "--{}={}".format(arg_name, ",".join(arg_val))
         elif isinstance(arg_val, bool):
             if arg_val:
-                arg = '--{}'.format(arg_name)
+                arg = "--{}".format(arg_name)
         else:
-            arg = '--{}={}'.format(arg_name, arg_val)
+            arg = "--{}={}".format(arg_name, arg_val)
         args.append(arg)
     return args
 
@@ -148,21 +148,18 @@ def parse_stdout(document, stdout):
         msg = code + ' ' + msg
         diagnostics.append(
             {
-                'source': 'flake8',
-                'code': code,
-                'range': {
-                    'start': {
-                        'line': line,
-                        'character': character
-                    },
-                    'end': {
-                        'line': line,
+                "source": "flake8",
+                "code": code,
+                "range": {
+                    "start": {"line": line, "character": character},
+                    "end": {
+                        "line": line,
                         # no way to determine the column
-                        'character': len(document.lines[line])
-                    }
+                        "character": len(document.lines[line]),
+                    },
                 },
-                'message': msg,
-                'severity': lsp.DiagnosticSeverity.Warning,
+                "message": msg,
+                "severity": lsp.DiagnosticSeverity.Warning,
             }
         )
 

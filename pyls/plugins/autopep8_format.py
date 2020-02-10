@@ -18,19 +18,19 @@ def pyls_format_range(config, document, range):  # pylint: disable=redefined-bui
     log.info("Formatting document %s in range %s with autopep8", document, range)
 
     # First we 'round' the range up/down to full lines only
-    range['start']['character'] = 0
-    range['end']['line'] += 1
-    range['end']['character'] = 0
+    range["start"]["character"] = 0
+    range["end"]["line"] += 1
+    range["end"]["character"] = 0
 
     # Add 1 for 1-indexing vs LSP's 0-indexing
-    line_range = (range['start']['line'] + 1, range['end']['line'] + 1)
+    line_range = (range["start"]["line"] + 1, range["end"]["line"] + 1)
     return _format(config, document, line_range=line_range)
 
 
 def _format(config, document, line_range=None):
     options = _autopep8_config(config, document)
     if line_range:
-        options['line_range'] = list(line_range)
+        options["line_range"] = list(line_range)
 
     # Temporarily re-monkey-patch the continued_indentation checker - #771
     del pycodestyle._checks['logical_line'][pycodestyle.continued_indentation]
@@ -47,20 +47,21 @@ def _format(config, document, line_range=None):
 
     # I'm too lazy at the moment to parse diffs into TextEdit items
     # So let's just return the entire file...
-    return [{
-        'range': {
-            'start': {'line': 0, 'character': 0},
-            # End char 0 of the line after our document
-            'end': {'line': len(document.lines), 'character': 0}
-        },
-        'newText': new_source
-    }]
+    return [
+        {
+            "range": {
+                "start": {"line": 0, "character": 0},
+                # End char 0 of the line after our document
+                "end": {"line": len(document.lines), "character": 0},
+            },
+            "newText": new_source,
+        }
+    ]
 
 
 def _autopep8_config(config, document=None):
     # We user pycodestyle settings to avoid redefining things
-    path = document.path if document is not None else None
-    settings = config.plugin_settings('pycodestyle', document_path=path)
+    settings = config.plugin_settings('pycodestyle')
     options = {
         'exclude': settings.get('exclude'),
         'hang_closing': settings.get('hangClosing'),

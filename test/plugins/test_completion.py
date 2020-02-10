@@ -10,12 +10,10 @@ from pyls.plugins.jedi_completion import pyls_completions as pyls_jedi_completio
 from pyls.plugins.rope_completion import pyls_completions as pyls_rope_completions
 
 
-PY2 = sys.version[0] == '2'
-LINUX = sys.platform.startswith('linux')
-CI = os.environ.get('CI')
-LOCATION = os.path.realpath(
-    os.path.join(os.getcwd(), os.path.dirname(__file__))
-)
+PY2 = sys.version[0] == "2"
+LINUX = sys.platform.startswith("linux")
+CI = os.environ.get("CI")
+LOCATION = os.path.realpath(os.path.join(os.getcwd(), os.path.dirname(__file__)))
 DOC_URI = uris.from_fs_path(__file__)
 DOC = """import os
 print os.path.isabs("/tmp")
@@ -74,18 +72,18 @@ def test_jedi_completion_with_fuzzy_enabled(config, workspace):
     assert items[0]['label'] == 'commonprefix(list)'
 
     # Test we don't throw with big character
-    pyls_jedi_completions(config, doc, {'line': 1, 'character': 1000})
+    pyls_jedi_completions(config, doc, {"line": 1, "character": 1000})
 
 
 def test_rope_completion(config, workspace):
     # Over 'i' in os.path.isabs(...)
-    com_position = {'line': 1, 'character': 15}
+    com_position = {"line": 1, "character": 15}
     workspace.put_document(DOC_URI, source=DOC)
     doc = workspace.get_document(DOC_URI)
     items = pyls_rope_completions(config, workspace, doc, com_position)
 
     assert items
-    assert items[0]['label'] == 'isabs'
+    assert items[0]["label"] == "isabs"
 
 
 def test_jedi_completion_ordering(config, workspace):
@@ -94,10 +92,10 @@ def test_jedi_completion_ordering(config, workspace):
     doc = Document(DOC_URI, workspace, DOC)
     completions = pyls_jedi_completions(config, doc, com_position)
 
-    items = {c['label']: c['sortText'] for c in completions}
+    items = {c["label"]: c["sortText"] for c in completions}
 
     # And that 'hidden' functions come after unhidden ones
-    assert items['hello()'] < items['_a_hello()']
+    assert items["hello()"] < items["_a_hello()"]
 
 
 def test_jedi_property_completion(config, workspace):
@@ -106,10 +104,10 @@ def test_jedi_property_completion(config, workspace):
     doc = Document(DOC_URI, workspace, DOC)
     completions = pyls_jedi_completions(config, doc, com_position)
 
-    items = {c['label']: c['sortText'] for c in completions}
+    items = {c["label"]: c["sortText"] for c in completions}
 
     # Ensure we can complete the 'world' property
-    assert 'world' in list(items.keys())[0]
+    assert "world" in list(items.keys())[0]
 
 
 def test_jedi_method_completion(config, workspace):
@@ -117,24 +115,34 @@ def test_jedi_method_completion(config, workspace):
     com_position = {'line': 20, 'character': 19}
     doc = Document(DOC_URI, workspace, DOC)
 
-    config.capabilities['textDocument'] = {'completion': {'completionItem': {'snippetSupport': True}}}
-    config.update({'plugins': {'jedi_completion': {'include_params': True}}})
+    config.capabilities["textDocument"] = {
+        "completion": {"completionItem": {"snippetSupport": True}}
+    }
+    config.update({"plugins": {"jedi_completion": {"include_params": True}}})
 
     completions = pyls_jedi_completions(config, doc, com_position)
-    everyone_method = [completion for completion in completions if completion['label'] == 'everyone(a, b, c, d)'][0]
+    everyone_method = [
+        completion
+        for completion in completions
+        if completion["label"] == "everyone(a, b, c, d)"
+    ][0]
 
     # Ensure we only generate snippets for positional args
-    assert everyone_method['insertTextFormat'] == lsp.InsertTextFormat.Snippet
-    assert everyone_method['insertText'] == 'everyone(${1:a}, ${2:b})$0'
+    assert everyone_method["insertTextFormat"] == lsp.InsertTextFormat.Snippet
+    assert everyone_method["insertText"] == "everyone(${1:a}, ${2:b})$0"
 
     # Disable param snippets
-    config.update({'plugins': {'jedi_completion': {'include_params': False}}})
+    config.update({"plugins": {"jedi_completion": {"include_params": False}}})
 
     completions = pyls_jedi_completions(config, doc, com_position)
-    everyone_method = [completion for completion in completions if completion['label'] == 'everyone(a, b, c, d)'][0]
+    everyone_method = [
+        completion
+        for completion in completions
+        if completion["label"] == "everyone(a, b, c, d)"
+    ][0]
 
-    assert 'insertTextFormat' not in everyone_method
-    assert everyone_method['insertText'] == 'everyone'
+    assert "insertTextFormat" not in everyone_method
+    assert everyone_method["insertText"] == "everyone"
 
 
 @pytest.mark.skipif(PY2 or (sys.platform.startswith('linux') and os.environ.get('CI') is not None),
@@ -156,7 +164,7 @@ def test_numpy_completions(config, workspace):
     items = pyls_jedi_completions(config, doc, com_position)
 
     assert items
-    assert any(['array' in i['label'] for i in items])
+    assert any(["array" in i["label"] for i in items])
 
 
 def test_pandas_completions(config, workspace):
@@ -166,7 +174,7 @@ def test_pandas_completions(config, workspace):
     items = pyls_jedi_completions(config, doc, com_position)
 
     assert items
-    assert any(['DataFrame' in i['label'] for i in items])
+    assert any(["DataFrame" in i["label"] for i in items])
 
 
 def test_matplotlib_completions(config, workspace):
@@ -176,9 +184,13 @@ def test_matplotlib_completions(config, workspace):
     items = pyls_jedi_completions(config, doc, com_position)
 
     assert items
-    assert any(['plot' in i['label'] for i in items])
+    assert any(["plot" in i["label"] for i in items])
 
 
+@pytest.mark.skipif(
+    LooseVersion(JEDI_VERSION) < LooseVersion("0.15.2"),
+    reason="This test fails with Jedi 0.15.1 or less",
+)
 def test_snippets_completion(config, workspace):
     doc_snippets = 'from collections import defaultdict \na=defaultdict'
     com_position = {'line': 0, 'character': 35}
@@ -187,9 +199,9 @@ def test_snippets_completion(config, workspace):
         'completion': {'completionItem': {'snippetSupport': True}}}
     config.update({'plugins': {'jedi_completion': {'include_params': True}}})
     completions = pyls_jedi_completions(config, doc, com_position)
-    assert completions[0]['insertText'] == 'defaultdict'
+    assert completions[0]["insertText"] == "defaultdict"
 
-    com_position = {'line': 1, 'character': len(doc_snippets)}
+    com_position = {"line": 1, "character": len(doc_snippets)}
     completions = pyls_jedi_completions(config, doc, com_position)
     assert completions[0]['insertText'] == 'defaultdict($0)'
     assert completions[0]['insertTextFormat'] == lsp.InsertTextFormat.Snippet
@@ -234,13 +246,13 @@ def test_multiline_import_snippets(config, workspace):
         'completion': {'completionItem': {'snippetSupport': True}}}
     config.update({'plugins': {'jedi_completion': {'include_params': True}}})
 
-    position = {'line': 1, 'character': 5}
+    position = {"line": 1, "character": 5}
     completions = pyls_jedi_completions(config, doc, position)
-    assert completions[0]['insertText'] == 'date'
+    assert completions[0]["insertText"] == "date"
 
-    position = {'line': 2, 'character': 9}
+    position = {"line": 2, "character": 9}
     completions = pyls_jedi_completions(config, doc, position)
-    assert completions[0]['insertText'] == 'datetime'
+    assert completions[0]["insertText"] == "datetime"
 
 
 def test_multiline_snippets(config, workspace):
@@ -250,13 +262,13 @@ def test_multiline_snippets(config, workspace):
         'completion': {'completionItem': {'snippetSupport': True}}}
     config.update({'plugins': {'jedi_completion': {'include_params': True}}})
 
-    position = {'line': 1, 'character': 5}
+    position = {"line": 1, "character": 5}
     completions = pyls_jedi_completions(config, doc, position)
-    assert completions[0]['insertText'] == 'date'
+    assert completions[0]["insertText"] == "date"
 
-    position = {'line': 2, 'character': 9}
+    position = {"line": 2, "character": 9}
     completions = pyls_jedi_completions(config, doc, position)
-    assert completions[0]['insertText'] == 'datetime'
+    assert completions[0]["insertText"] == "datetime"
 
 
 def test_multistatement_snippet(config, workspace):
@@ -268,21 +280,21 @@ def test_multistatement_snippet(config, workspace):
     doc = Document(DOC_URI, workspace, document)
     position = {'line': 0, 'character': len(document)}
     completions = pyls_jedi_completions(config, doc, position)
-    assert completions[0]['insertText'] == 'date'
+    assert completions[0]["insertText"] == "date"
 
     document = 'from datetime import date; a = date'
     doc = Document(DOC_URI, workspace, document)
     position = {'line': 0, 'character': len(document)}
     completions = pyls_jedi_completions(config, doc, position)
-    assert completions[0]['insertText'] == 'date(${1:year}, ${2:month}, ${3:day})$0'
+    assert completions[0]["insertText"] == "date(${1:year}, ${2:month}, ${3:day})$0"
 
 
 def test_jedi_completion_extra_paths(tmpdir, workspace):
     # Create a tempfile with some content and pass to extra_paths
-    temp_doc_content = '''
+    temp_doc_content = """
 def spam():
     pass
-'''
+"""
     p = tmpdir.mkdir("extra_path")
     extra_paths = [str(p)]
     p = p.join("foo.py")
@@ -316,9 +328,9 @@ def test_jedi_completion_environment(workspace):
     doc = Document(DOC_URI, workspace, doc_content)
 
     # After 'import logh' with default environment
-    com_position = {'line': 0, 'character': 11}
+    com_position = {"line": 0, "character": 11}
 
-    assert os.path.isdir('/tmp/pyenv/')
+    assert os.path.isdir("/tmp/pyenv/")
 
     settings = {'pyls': {'plugins': {'jedi': {'environment': None}}}}
     doc.update_config(settings)

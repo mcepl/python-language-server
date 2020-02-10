@@ -22,12 +22,12 @@ class Directory(object):
 
 def test_definitions(config, workspace):
     # Over 'a' in print a
-    cursor_pos = {'line': 3, 'character': 6}
+    cursor_pos = {"line": 3, "character": 6}
 
     # The definition of 'a'
     def_range = {
-        'start': {'line': 0, 'character': 4},
-        'end': {'line': 0, 'character': 5}
+        "start": {"line": 0, "character": 4},
+        "end": {"line": 0, "character": 5},
     }
 
     doc = Document(DOC_URI, workspace, DOC)
@@ -36,7 +36,7 @@ def test_definitions(config, workspace):
 
 def test_builtin_definition(config, workspace):
     # Over 'i' in dict
-    cursor_pos = {'line': 8, 'character': 24}
+    cursor_pos = {"line": 8, "character": 24}
 
     # No go-to def for builtins
     doc = Document(DOC_URI, workspace, DOC)
@@ -45,12 +45,12 @@ def test_builtin_definition(config, workspace):
 
 def test_assignment(config, workspace):
     # Over 's' in self.members[id]
-    cursor_pos = {'line': 11, 'character': 19}
+    cursor_pos = {"line": 11, "character": 19}
 
     # The assignment of 'self.members'
     def_range = {
-        'start': {'line': 8, 'character': 13},
-        'end': {'line': 8, 'character': 20}
+        "start": {"line": 8, "character": 13},
+        "end": {"line": 8, "character": 20},
     }
 
     doc = Document(DOC_URI, workspace, DOC)

@@ -48,11 +48,11 @@ def test_flake8_lint(workspace):
         msg = 'F841 local variable \'a\' is assigned to but never used'
         unused_var = [d for d in diags if d['message'] == msg][0]
 
-        assert unused_var['source'] == 'flake8'
-        assert unused_var['code'] == 'F841'
-        assert unused_var['range']['start'] == {'line': 5, 'character': 1}
-        assert unused_var['range']['end'] == {'line': 5, 'character': 11}
-        assert unused_var['severity'] == lsp.DiagnosticSeverity.Warning
+        assert unused_var["source"] == "flake8"
+        assert unused_var["code"] == "F841"
+        assert unused_var["range"]["start"] == {"line": 5, "character": 1}
+        assert unused_var["range"]["end"] == {"line": 5, "character": 11}
+        assert unused_var["severity"] == lsp.DiagnosticSeverity.Warning
 
     finally:
         os.remove(name)

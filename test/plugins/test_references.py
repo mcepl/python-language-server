@@ -9,8 +9,8 @@ from pyls.plugins.references import pyls_references
 from pyls._utils import PY2
 
 
-DOC1_NAME = 'test1.py'
-DOC2_NAME = 'test2.py'
+DOC1_NAME = "test1.py"
+DOC2_NAME = "test2.py"
 
 DOC1 = """class Test1():
     pass
@@ -35,7 +35,7 @@ def tmp_workspace(temp_workspace_factory):
 
 def test_references(tmp_workspace):  # pylint: disable=redefined-outer-name
     # Over 'Test1' in class Test1():
-    position = {'line': 0, 'character': 8}
+    position = {"line": 0, "character": 8}
     DOC1_URI = uris.from_fs_path(os.path.join(tmp_workspace.root_path, DOC1_NAME))
     doc1 = Document(DOC1_URI, tmp_workspace)
 
@@ -49,18 +49,18 @@ def test_references(tmp_workspace):  # pylint: disable=redefined-outer-name
     assert len(no_def_refs) == 1
 
     # Make sure our definition is correctly located
-    doc1_ref = [u for u in refs if u['uri'] == DOC1_URI][0]
-    assert doc1_ref['range']['start'] == {'line': 0, 'character': 6}
-    assert doc1_ref['range']['end'] == {'line': 0, 'character': 11}
+    doc1_ref = [u for u in refs if u["uri"] == DOC1_URI][0]
+    assert doc1_ref["range"]["start"] == {"line": 0, "character": 6}
+    assert doc1_ref["range"]["end"] == {"line": 0, "character": 11}
 
     # Make sure our import is correctly located
-    doc2_import_ref = [u for u in refs if u['uri'] != DOC1_URI][0]
-    assert doc2_import_ref['range']['start'] == {'line': 0, 'character': 18}
-    assert doc2_import_ref['range']['end'] == {'line': 0, 'character': 23}
+    doc2_import_ref = [u for u in refs if u["uri"] != DOC1_URI][0]
+    assert doc2_import_ref["range"]["start"] == {"line": 0, "character": 18}
+    assert doc2_import_ref["range"]["end"] == {"line": 0, "character": 23}
 
-    doc2_usage_ref = [u for u in refs if u['uri'] != DOC1_URI][1]
-    assert doc2_usage_ref['range']['start'] == {'line': 3, 'character': 4}
-    assert doc2_usage_ref['range']['end'] == {'line': 3, 'character': 9}
+    doc2_usage_ref = [u for u in refs if u["uri"] != DOC1_URI][1]
+    assert doc2_usage_ref["range"]["start"] == {"line": 3, "character": 4}
+    assert doc2_usage_ref["range"]["end"] == {"line": 3, "character": 9}
 
 
 @pytest.mark.skipif(PY2, reason="Jedi sometimes fails while checking pylint "

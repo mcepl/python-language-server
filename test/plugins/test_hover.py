@@ -53,16 +53,17 @@ def test_numpy_hover(workspace):
 
 def test_hover(workspace):
     # Over 'main' in def main():
-    hov_position = {'line': 2, 'character': 6}
+    hov_position = {"line": 2, "character": 6}
     # Over the blank second line
-    no_hov_position = {'line': 1, 'character': 0}
+    no_hov_position = {"line": 1, "character": 0}
 
     doc = Document(DOC_URI, workspace, DOC)
 
-    contents = [{'language': 'python', 'value': 'main()'}, 'hello world']
+    if LooseVersion(_utils.JEDI_VERSION) >= LooseVersion("0.15.0"):
+        contents = [{"language": "python", "value": "main()"}, "hello world"]
+    else:
+        contents = "main()\n\nhello world"
 
-    assert {
-        'contents': contents
-    } == pyls_hover(doc, hov_position)
+    assert {"contents": contents} == pyls_hover(doc, hov_position)
 
-    assert {'contents': ''} == pyls_hover(doc, no_hov_position)
+    assert {"contents": ""} == pyls_hover(doc, no_hov_position)

@@ -21,4 +21,6 @@ def pyls_references(document, position, exclude_declaration=False):
             'start': {'line': d.line - 1, 'character': d.column},
             'end': {'line': d.line - 1, 'character': d.column + len(d.name)}
         }
-    } for d in usages if not d.in_builtin_module()]
+        for d in usages
+        if not d.in_builtin_module()
+    ]

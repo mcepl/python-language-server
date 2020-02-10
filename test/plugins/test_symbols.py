@@ -10,9 +10,9 @@ from pyls.lsp import SymbolKind
 from pyls.workspace import Document
 
 
-PY2 = sys.version[0] == '2'
-LINUX = sys.platform.startswith('linux')
-CI = os.environ.get('CI')
+PY2 = sys.version[0] == "2"
+LINUX = sys.platform.startswith("linux")
+CI = os.environ.get("CI")
 DOC_URI = uris.from_fs_path(__file__)
 DOC = """import sys
 
@@ -35,7 +35,7 @@ def helper_check_symbols_all_scope(symbols):
     assert len(symbols) == 8
 
     def sym(name):
-        return [s for s in symbols if s['name'] == name][0]
+        return [s for s in symbols if s["name"] == name][0]
 
     # Check we have some sane mappings to VSCode constants
     assert sym('a')['kind'] == SymbolKind.Variable
@@ -44,7 +44,7 @@ def helper_check_symbols_all_scope(symbols):
     assert sym('main')['kind'] == SymbolKind.Function
 
     # Not going to get too in-depth here else we're just testing Jedi
-    assert sym('a')['location']['range']['start'] == {'line': 2, 'character': 0}
+    assert sym("a")["location"]["range"]["start"] == {"line": 2, "character": 0}
 
 
 def test_symbols(config, workspace):
@@ -57,19 +57,19 @@ def test_symbols(config, workspace):
     assert len(symbols) == 5
 
     def sym(name):
-        return [s for s in symbols if s['name'] == name][0]
+        return [s for s in symbols if s["name"] == name][0]
 
     # Check we have some sane mappings to VSCode constants
-    assert sym('a')['kind'] == SymbolKind.Variable
-    assert sym('B')['kind'] == SymbolKind.Class
-    assert sym('main')['kind'] == SymbolKind.Function
+    assert sym("a")["kind"] == SymbolKind.Variable
+    assert sym("B")["kind"] == SymbolKind.Class
+    assert sym("main")["kind"] == SymbolKind.Function
 
     # Not going to get too in-depth here else we're just testing Jedi
-    assert sym('a')['location']['range']['start'] == {'line': 2, 'character': 0}
+    assert sym("a")["location"]["range"]["start"] == {"line": 2, "character": 0}
 
     # Ensure that the symbol range spans the whole definition
-    assert sym('main')['location']['range']['start'] == {'line': 9, 'character': 0}
-    assert sym('main')['location']['range']['end'] == {'line': 12, 'character': 0}
+    assert sym("main")["location"]["range"]["start"] == {"line": 9, "character": 0}
+    assert sym("main")["location"]["range"]["end"] == {"line": 12, "character": 0}
 
 
 def test_symbols_all_scopes(config, workspace):
