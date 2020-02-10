@@ -5,10 +5,9 @@ import sys
 import pytest
 
 from pyls import uris
-from pyls.plugins.symbols import pyls_document_symbols
 from pyls.lsp import SymbolKind
+from pyls.plugins.symbols import pyls_document_symbols
 from pyls.workspace import Document
-
 
 PY2 = sys.version[0] == "2"
 LINUX = sys.platform.startswith("linux")

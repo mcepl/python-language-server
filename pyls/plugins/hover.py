@@ -1,8 +1,8 @@
 # Copyright 2017 Palantir Technologies, Inc.
-
 import logging
+from distutils.version import LooseVersion
 
-from pyls import hookimpl, _utils
+from pyls import _utils, hookimpl
 
 log = logging.getLogger(__name__)
 

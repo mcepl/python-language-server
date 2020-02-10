@@ -1,8 +1,7 @@
 # Copyright 2017 Palantir Technologies, Inc.
 from pyls import lsp, uris
-from pyls.workspace import Document
 from pyls.plugins.highlight import pyls_document_highlight
-
+from pyls.workspace import Document
 
 DOC_URI = uris.from_fs_path(__file__)
 DOC = """a = "hello"

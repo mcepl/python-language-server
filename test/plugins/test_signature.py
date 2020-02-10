@@ -1,5 +1,6 @@
 # Copyright 2017 Palantir Technologies, Inc.
 import pytest
+
 from pyls import uris
 from pyls.plugins import signature
 from pyls.workspace import Document

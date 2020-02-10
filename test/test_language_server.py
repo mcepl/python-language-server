@@ -1,4 +1,5 @@
 # Copyright 2017 Palantir Technologies, Inc.
+import multiprocessing
 import os
 import time
 import multiprocessing
@@ -7,8 +8,9 @@ from threading import Thread
 
 from pyls_jsonrpc.exceptions import JsonRpcMethodNotFound
 import pytest
+from pyls_jsonrpc.exceptions import JsonRpcMethodNotFound
 
-from pyls.python_ls import start_io_lang_server, RopeLanguageServer
+from pyls.python_ls import RopeLanguageServer, start_io_lang_server
 
 CALL_TIMEOUT = 10
 PY2 = sys.version_info[0] == 2

@@ -1,6 +1,7 @@
 # Copyright 2019 Palantir Technologies, Inc.
-import tempfile
 import os
+import tempfile
+
 from mock import patch
 from pyls import lsp, uris
 from pyls.plugins import flake8_lint

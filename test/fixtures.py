@@ -1,13 +1,14 @@
 # Copyright 2017 Palantir Technologies, Inc.
 import os
 import sys
-from mock import Mock
+
 import pytest
+from mock import Mock
 
 from pyls import uris
 from pyls.config.config import Config
 from pyls.python_ls import RopeLanguageServer
-from pyls.workspace import Workspace, Document
+from pyls.workspace import Document, Workspace
 
 if sys.version_info[0] < 3:
     from StringIO import StringIO

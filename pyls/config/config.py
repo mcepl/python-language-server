@@ -1,15 +1,17 @@
 # Copyright 2017 Palantir Technologies, Inc.
 import logging
+
 import pkg_resources
+import pluggy
+
+from pyls import PYLS, _utils, hookspecs, uris
 
 try:
     from functools import lru_cache
 except ImportError:
     from backports.functools_lru_cache import lru_cache
 
-import pluggy
 
-from pyls import _utils, hookspecs, uris, PYLS
 
 log = logging.getLogger(__name__)
 

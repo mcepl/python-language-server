@@ -5,8 +5,8 @@ import tempfile
 
 from test import py2_only, py3_only, IS_PY3
 from pyls import lsp, uris
-from pyls.workspace import Document
 from pyls.plugins import pylint_lint
+from pyls.workspace import Document
 
 DOC_URI = uris.from_fs_path(__file__)
 DOC = """import sys

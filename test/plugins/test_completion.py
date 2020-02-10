@@ -6,9 +6,6 @@ import pytest
 
 from pyls import uris, lsp
 from pyls.workspace import Document
-from pyls.plugins.jedi_completion import pyls_completions as pyls_jedi_completions
-from pyls.plugins.rope_completion import pyls_completions as pyls_rope_completions
-
 
 PY2 = sys.version[0] == "2"
 LINUX = sys.platform.startswith("linux")

@@ -1,6 +1,7 @@
 #!/usr/bin/env python
 import sys
 from setuptools import find_packages, setup
+
 import versioneer
 import sys
 
@@ -68,6 +69,17 @@ setup(
                  'pytest', 'mock', 'pytest-cov', 'coverage', 'numpy', 'pandas',
                  'matplotlib', 'pyqt5;python_version>="3"', 'flaky'],
     },
+    classifiers=[
+        'Development Status :: 1 - Planning',
+        'Intended Audience :: Developers',
+        'License :: OSI Approved :: MIT License',
+        'Operating System :: OS Independent',
+        'Programming Language :: Python',
+        'Topic :: Software Development :: User Interfaces',
+        'Topic :: Software Development',
+        'Programming Language :: Python :: 3.6',
+        'Programming Language :: Python :: 3.7',
+    ],
     # To provide executable scripts, use entry points in preference to the
     # "scripts" keyword. Entry points provide cross-platform support and allow
     # pip to create the appropriate form of executable for the target platform.

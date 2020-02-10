@@ -1,8 +1,9 @@
 # Copyright 2017 Palantir Technologies, Inc.
 import pycodestyle
-from pyls._utils import find_parents
-from .source import ConfigSource
 
+from pyls._utils import find_parents
+
+from .source import ConfigSource
 
 CONFIG_KEY = "pycodestyle"
 USER_CONFIGS = [pycodestyle.USER_CONFIG] if pycodestyle.USER_CONFIG else []

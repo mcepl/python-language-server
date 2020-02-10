@@ -1,18 +1,15 @@
 # Copyright 2018 Google LLC.
 """Linter plugin for pylint."""
 import collections
+import json
 import logging
 import sys
 import re
 from subprocess import Popen, PIPE
 
 from pylint.epylint import py_run
-from pyls import hookimpl, lsp
 
-try:
-    import ujson as json
-except Exception:  # pylint: disable=broad-except
-    import json
+from pyls import hookimpl, lsp
 
 log = logging.getLogger(__name__)
 

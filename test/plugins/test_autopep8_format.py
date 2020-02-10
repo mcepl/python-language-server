@@ -1,6 +1,7 @@
 # Copyright 2017 Palantir Technologies, Inc.
 from pyls import uris
-from pyls.plugins.autopep8_format import pyls_format_document, pyls_format_range
+from pyls.plugins.autopep8_format import (pyls_format_document,
+                                          pyls_format_range)
 from pyls.workspace import Document
 
 DOC_URI = uris.from_fs_path(__file__)

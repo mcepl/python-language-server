@@ -1,5 +1,6 @@
 # Copyright 2017 Palantir Technologies, Inc.
-from test.fixtures import DOC_URI, DOC
+from test.fixtures import DOC, DOC_URI
+
 from pyls.workspace import Document
 
 

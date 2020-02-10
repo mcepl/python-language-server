@@ -3,7 +3,9 @@
 import logging
 import os.path
 import re
-from subprocess import Popen, PIPE
+from os import path
+from subprocess import PIPE, Popen
+
 from pyls import hookimpl, lsp
 
 log = logging.getLogger(__name__)

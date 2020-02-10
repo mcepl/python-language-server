@@ -1,7 +1,7 @@
 # Copyright 2017 Palantir Technologies, Inc.
 from pyls import lsp, uris
-from pyls.workspace import Document
 from pyls.plugins import mccabe_lint
+from pyls.workspace import Document
 
 DOC_URI = uris.from_fs_path(__file__)
 DOC = """def hello():

@@ -1,15 +1,15 @@
 # Copyright 2017 Palantir Technologies, Inc.
-from functools import partial
 import logging
 import os
 import socketserver
 import threading
+from functools import partial
 
 from pyls_jsonrpc.dispatchers import MethodDispatcher
 from pyls_jsonrpc.endpoint import Endpoint
 from pyls_jsonrpc.streams import JsonRpcStreamReader, JsonRpcStreamWriter
 
-from . import lsp, _utils, uris
+from . import _utils, lsp, uris
 from .config import config
 from .workspace import Workspace
 

@@ -1,9 +1,12 @@
 # Copyright 2017 Palantir Technologies, Inc.
 import os
+
 import pytest
+
 from pyls import lsp, uris
 from pyls.workspace import Document
 from pyls.plugins import pycodestyle_lint
+from pyls.workspace import Document
 
 DOC_URI = uris.from_fs_path(__file__)
 DOC = """import sys

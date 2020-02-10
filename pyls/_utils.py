@@ -5,6 +5,7 @@ import logging
 import os
 import sys
 import threading
+from distutils.version import LooseVersion
 
 import jedi
 

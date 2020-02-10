@@ -8,7 +8,7 @@ from threading import RLock
 
 import jedi
 
-from . import lsp, uris, _utils
+from . import _utils, lsp, uris
 
 log = logging.getLogger(__name__)
 

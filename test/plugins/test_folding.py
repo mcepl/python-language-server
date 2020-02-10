@@ -3,9 +3,8 @@
 from textwrap import dedent
 
 from pyls import uris
-from pyls.workspace import Document
 from pyls.plugins.folding import pyls_folding_range
-
+from pyls.workspace import Document
 
 DOC_URI = uris.from_fs_path(__file__)
 DOC = dedent(

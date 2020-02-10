@@ -3,7 +3,6 @@ from pyls import uris
 from pyls.plugins.definition import pyls_definitions
 from pyls.workspace import Document
 
-
 DOC_URI = uris.from_fs_path(__file__)
 DOC = """def a():
     pass

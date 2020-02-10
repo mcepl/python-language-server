@@ -1,7 +1,9 @@
 # Copyright 2017 Palantir Technologies, Inc.
 import os
 import sys
+
 import pluggy
+
 from ._version import get_versions
 
 __version__ = get_versions()["version"]

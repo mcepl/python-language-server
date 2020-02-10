@@ -1,7 +1,9 @@
 # Copyright 2017 Palantir Technologies, Inc.
 import logging
 import os
+
 from pyls._utils import find_parents
+
 from .source import ConfigSource
 
 log = logging.getLogger(__name__)
