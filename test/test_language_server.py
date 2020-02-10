@@ -8,7 +8,7 @@ from threading import Thread
 from pyls_jsonrpc.exceptions import JsonRpcMethodNotFound
 import pytest
 
-from pyls.python_ls import start_io_lang_server, PythonLanguageServer
+from pyls.python_ls import start_io_lang_server, RopeLanguageServer
 
 CALL_TIMEOUT = 10
 PY2 = sys.version_info[0] == 2
@@ -41,7 +41,7 @@ class _ClientServer(object):
         ))
         self.process.start()
 
-        self.client = PythonLanguageServer(
+        self.client = RopeLanguageServer(
             os.fdopen(scr, "rb"), os.fdopen(csw, "wb"), start_io_lang_server
         )
         self.client_thread = Thread(target=start_client, args=[self.client])

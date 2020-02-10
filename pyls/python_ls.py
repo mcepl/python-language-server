@@ -49,8 +49,8 @@ class _StreamHandlerWrapper(socketserver.StreamRequestHandler, object):
 
 
 def start_tcp_lang_server(bind_addr, port, check_parent_process, handler_class):
-    if not issubclass(handler_class, PythonLanguageServer):
-        raise ValueError("Handler class must be an instance of PythonLanguageServer")
+    if not issubclass(handler_class, RopeLanguageServer):
+        raise ValueError("Handler class must be an instance of RopeLanguageServer")
 
     def shutdown_server(check_parent_process, *args):
         # pylint: disable=unused-argument
@@ -88,14 +88,14 @@ def start_tcp_lang_server(bind_addr, port, check_parent_process, handler_class):
 
 
 def start_io_lang_server(rfile, wfile, check_parent_process, handler_class):
-    if not issubclass(handler_class, PythonLanguageServer):
-        raise ValueError("Handler class must be an instance of PythonLanguageServer")
+    if not issubclass(handler_class, RopeLanguageServer):
+        raise ValueError("Handler class must be an instance of RopeLanguageServer")
     log.info("Starting %s IO language server", handler_class.__name__)
     server = handler_class(rfile, wfile, check_parent_process)
     server.start()
 
 
-class PythonLanguageServer(MethodDispatcher):
+class RopeLanguageServer(MethodDispatcher):
     """ Implementation of the Microsoft VSCode Language Server Protocol
     https://github.com/Microsoft/language-server-protocol/blob/master/versions/protocol-1-x.md
     """
@@ -131,7 +131,7 @@ class PythonLanguageServer(MethodDispatcher):
             raise KeyError
 
         try:
-            return super(PythonLanguageServer, self).__getitem__(item)
+            return super(RopeLanguageServer, self).__getitem__(item)
         except KeyError:
             # Fallback through extra dispatchers
             for dispatcher in self._dispatchers:

@@ -6,7 +6,7 @@ import pytest
 
 from pyls import uris
 from pyls.config.config import Config
-from pyls.python_ls import PythonLanguageServer
+from pyls.python_ls import RopeLanguageServer
 from pyls.workspace import Workspace, Document
 
 if sys.version_info[0] < 3:
@@ -25,7 +25,7 @@ def main():
 @pytest.fixture
 def pyls(tmpdir):
     """ Return an initialized python LS """
-    ls = PythonLanguageServer(StringIO, StringIO)
+    ls = RopeLanguageServer(StringIO, StringIO)
 
     ls.m_initialize(
         processId=1, rootUri=uris.from_fs_path(str(tmpdir)), initializationOptions={}
