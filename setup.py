@@ -10,14 +10,14 @@ install_requires = [
         'configparser; python_version<"3.0"',
         'future>=0.14.0; python_version<"3"',
         'backports.functools_lru_cache; python_version<"3.2"',
-        'jedi>=0.17.2,<0.18.0',
+        'rope>=0.18.0',
         'python-jsonrpc-server>=0.4.0',
         'pluggy',
         'ujson<=2.0.3 ; platform_system!="Windows" and python_version<"3.0"',
         'ujson>=3.0.0 ; python_version>"3"']
 
 setup(
-    name='python-language-server',
+    name='rope-language-server',
 
     # Versions should comply with PEP440.  For a discussion on single-sourcing
     # the version across setup.py and the project code, see
@@ -30,9 +30,9 @@ setup(
     long_description=README,
 
     # The project's main homepage.
-    url='https://github.com/palantir/python-language-server',
+    url='https://github.com/mcepl/rope-language-server',
 
-    author='Palantir Technologies, Inc.',
+    author='Matěj Cepl (based on the code from Palantir Technologies, Inc.)',
 
     # You can just specify the packages manually here if your project is
     # simple. Or you can use find_packages().
@@ -59,7 +59,6 @@ setup(
             # pylint >= 2.5.0 is required for working through stdin and only
             # available with python3
             'pylint>=2.5.0' if sys.version_info.major >= 3 else 'pylint',
-            'rope>=0.10.5',
             'yapf',
         ],
         'autopep8': ['autopep8'],

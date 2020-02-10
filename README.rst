@@ -1,19 +1,16 @@
 Python Language Server
 ======================
 
-.. image:: https://github.com/palantir/python-language-server/workflows/Linux%20tests/badge.svg
-    :target: https://github.com/palantir/python-language-server/actions?query=workflow%3A%22Linux+tests%22
+.. image:: https://circleci.com/gh/palantir/rope-language-server.svg?style=shield
+    :target: https://circleci.com/gh/palantir/rope-language-server
 
-.. image:: https://github.com/palantir/python-language-server/workflows/Mac%20tests/badge.svg
-    :target: https://github.com/palantir/python-language-server/actions?query=workflow%3A%22Mac+tests%22
+.. image:: https://ci.appveyor.com/api/projects/status/mdacv6fnif7wonl0?svg=true
+    :target: https://ci.appveyor.com/project/gatesn/rope-language-server
 
-.. image:: https://github.com/palantir/python-language-server/workflows/Windows%20tests/badge.svg
-    :target: https://github.com/palantir/python-language-server/actions?query=workflow%3A%22Windows+tests%22
+.. image:: https://img.shields.io/github/license/palantir/rope-language-server.svg
+     :target: https://github.com/palantir/rope-language-server/blob/master/LICENSE
 
-.. image:: https://img.shields.io/github/license/palantir/python-language-server.svg
-     :target: https://github.com/palantir/python-language-server/blob/master/LICENSE
-
-A Python 2.7 and 3.5+ implementation of the `Language Server Protocol`_.
+A 3.5+ implementation of the `Language Server Protocol`_.
 
 Installation
 ------------
@@ -21,7 +18,7 @@ Installation
 The base language server requires Jedi_ to provide Completions, Definitions, Hover, References, Signature Help, and
 Symbols:
 
-``pip install python-language-server``
+``pip install rope-language-server``
 
 If the respective dependencies are found, the following optional providers will be enabled:
 
@@ -35,11 +32,11 @@ If the respective dependencies are found, the following optional providers will 
 
 Optional providers can be installed using the `extras` syntax. To install YAPF_ formatting for example:
 
-``pip install 'python-language-server[yapf]'``
+``pip install 'rope-language-server[yapf]'``
 
 All optional providers can be installed using:
 
-``pip install 'python-language-server[all]'``
+``pip install 'rope-language-server[all]'``
 
 If you get an error similar to ``'install_requires' must be a string or list of strings`` then please upgrade setuptools before trying again. 
 
@@ -120,33 +117,6 @@ Development
 To run the test suite:
 
 ``pip install .[test] && pytest``
-
-Develop against VS Code
-=======================
-
-The Python language server can be developed against a local instance of Visual Studio Code.
-
-Install `VSCode <https://code.visualstudio.com/download>`_
-
-.. code-block:: bash
-
-    # Setup a virtual env
-    virtualenv env
-    . env/bin/activate
-
-    # Install pyls
-    pip install .
-
-    # Install the vscode-client extension
-    cd vscode-client
-    yarn install
-
-    # Run VSCode which is configured to use pyls
-    # See the bottom of vscode-client/src/extension.ts for info
-    yarn run vscode -- $PWD/../
-
-Then to debug, click View -> Output and in the dropdown will be pyls.
-To refresh VSCode, press `Cmd + r`
 
 License
 -------
