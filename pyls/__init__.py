@@ -4,10 +4,10 @@ import sys
 
 import pluggy
 
-from ._version import get_versions
+# from importlib.resources import version
 
-__version__ = get_versions()["version"]
-del get_versions
+# __version__ = pkg_resources.get_distribution('rope-language-server').version
+__version__ = 0.0
 
 PYLS = "pyls"
 

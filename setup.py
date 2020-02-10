@@ -22,8 +22,8 @@ setup(
     # Versions should comply with PEP440.  For a discussion on single-sourcing
     # the version across setup.py and the project code, see
     # https://packaging.python.org/en/latest/single_source_version.html
-    version=versioneer.get_version(),
-    cmdclass=versioneer.get_cmdclass(),
+    version="0.0.1",
+    # cmdclass=versioneer.get_cmdclass(),
     description="Python Language Server for the Language Server Protocol",
     long_description=README,
     # The project's main homepage.
@@ -77,8 +77,8 @@ setup(
         'Programming Language :: Python',
         'Topic :: Software Development :: User Interfaces',
         'Topic :: Software Development',
-        'Programming Language :: Python :: 3.6',
         'Programming Language :: Python :: 3.7',
+        'Programming Language :: Python :: 3.8',
     ],
     # To provide executable scripts, use entry points in preference to the
     # "scripts" keyword. Entry points provide cross-platform support and allow

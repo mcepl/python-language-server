@@ -1,16 +1,7 @@
 Python Language Server
 ======================
 
-.. image:: https://circleci.com/gh/palantir/rope-language-server.svg?style=shield
-    :target: https://circleci.com/gh/palantir/rope-language-server
-
-.. image:: https://ci.appveyor.com/api/projects/status/mdacv6fnif7wonl0?svg=true
-    :target: https://ci.appveyor.com/project/gatesn/rope-language-server
-
-.. image:: https://img.shields.io/github/license/palantir/rope-language-server.svg
-     :target: https://github.com/palantir/rope-language-server/blob/master/LICENSE
-
-A 3.5+ implementation of the `Language Server Protocol`_.
+A 3.6+ implementation of the `Language Server Protocol`_.
 
 Installation
 ------------
