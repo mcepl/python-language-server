@@ -2,7 +2,7 @@
 import logging
 
 import pycodestyle
-from pyls import hookimpl, lsp
+from rols import hookimpl, lsp
 
 try:
     from autopep8 import continued_indentation as autopep8_c_i

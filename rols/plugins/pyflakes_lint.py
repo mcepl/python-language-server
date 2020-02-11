@@ -2,7 +2,7 @@
 from pyflakes import api as pyflakes_api
 from pyflakes import messages
 
-from pyls import hookimpl, lsp
+from rols import hookimpl, lsp
 
 # Pyflakes messages that should be reported as Errors instead of Warns
 PYFLAKES_ERROR_MESSAGES = (

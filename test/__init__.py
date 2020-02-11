@@ -3,7 +3,7 @@ import sys
 
 import pytest
 
-from pyls import IS_WIN
+from rols import IS_WIN
 
 IS_PY3 = sys.version_info.major == 3
 

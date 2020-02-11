@@ -3,9 +3,9 @@ import os
 
 import pytest
 
-from pyls import uris
-from pyls.plugins.references import pyls_references
-from pyls._utils import PY2
+from rols import uris
+from rols.plugins.references import pyls_references
+from rols._utils import PY2
 
 
 DOC1_NAME = "test1.py"

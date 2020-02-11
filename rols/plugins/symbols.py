@@ -2,8 +2,8 @@
 import logging
 import os
 
-from pyls import hookimpl
-from pyls.lsp import SymbolKind
+from rols import hookimpl
+from rols.lsp import SymbolKind
 
 log = logging.getLogger(__name__)
 

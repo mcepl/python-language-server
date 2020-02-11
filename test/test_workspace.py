@@ -4,7 +4,7 @@ import sys
 
 import pytest
 
-from pyls import uris
+from rols import uris
 
 PY2 = sys.version_info.major == 2
 

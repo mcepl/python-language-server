@@ -4,7 +4,7 @@ import logging
 import pkg_resources
 import pluggy
 
-from pyls import PYLS, _utils, hookspecs, uris
+from rols import PYLS, _utils, hookspecs, uris
 
 try:
     from functools import lru_cache

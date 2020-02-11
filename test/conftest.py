@@ -2,7 +2,7 @@
 """ py.test configuration"""
 import logging
 
-from pyls.__main__ import LOG_FORMAT
+from rols.__main__ import LOG_FORMAT
 
 logging.basicConfig(level=logging.DEBUG, format=LOG_FORMAT)
 

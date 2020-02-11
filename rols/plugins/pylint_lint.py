@@ -9,7 +9,7 @@ from subprocess import Popen, PIPE
 
 from pylint.epylint import py_run
 
-from pyls import hookimpl, lsp
+from rols import hookimpl, lsp
 
 log = logging.getLogger(__name__)
 

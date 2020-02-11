@@ -6,7 +6,7 @@ import re
 import parso
 import parso.python.tree as tree_nodes
 
-from pyls import hookimpl
+from rols import hookimpl
 
 SKIP_NODES = (tree_nodes.Module, tree_nodes.IfStmt, tree_nodes.TryStmt)
 IDENTATION_REGEX = re.compile(r"(\s+).+")

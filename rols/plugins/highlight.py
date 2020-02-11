@@ -1,6 +1,6 @@
 # Copyright 2017 Palantir Technologies, Inc.
 import logging
-from pyls import hookimpl, lsp, _utils
+from rols import hookimpl, lsp, _utils
 
 log = logging.getLogger(__name__)
 

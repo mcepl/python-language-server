@@ -1,19 +1,14 @@
 # Copyright 2017 Palantir Technologies, Inc.
 import os
 import sys
+from io import StringIO
 
 import pytest
 from mock import Mock
-
-from pyls import uris
-from pyls.config.config import Config
-from pyls.python_ls import RopeLanguageServer
-from pyls.workspace import Document, Workspace
-
-if sys.version_info[0] < 3:
-    from StringIO import StringIO
-else:
-    from io import StringIO
+from rols import uris
+from rols.config.config import Config
+from rols.python_ls import RopeLanguageServer
+from rols.workspace import Document, Workspace
 
 DOC_URI = uris.from_fs_path(__file__)
 DOC = """import sys
@@ -28,6 +23,7 @@ def pyls(tmpdir):
     """ Return an initialized python LS """
     ls = RopeLanguageServer(StringIO, StringIO)
 
+    breakpoint()
     ls.m_initialize(
         processId=1, rootUri=uris.from_fs_path(str(tmpdir)), initializationOptions={}
     )

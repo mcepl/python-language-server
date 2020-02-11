@@ -4,7 +4,7 @@ import time
 import mock
 from flaky import flaky
 
-from pyls import _utils
+from rols import _utils
 
 
 @flaky

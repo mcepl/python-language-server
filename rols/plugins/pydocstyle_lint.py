@@ -7,7 +7,7 @@ import sys
 
 import pydocstyle
 
-from pyls import hookimpl, lsp
+from rols import hookimpl, lsp
 
 log = logging.getLogger(__name__)
 

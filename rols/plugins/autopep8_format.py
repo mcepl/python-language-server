@@ -2,7 +2,7 @@
 import logging
 import pycodestyle
 from autopep8 import fix_code, continued_indentation as autopep8_c_i
-from pyls import hookimpl
+from rols import hookimpl
 
 log = logging.getLogger(__name__)
 

@@ -3,7 +3,7 @@ from test import unix_only, windows_only
 
 import pytest
 
-from pyls import uris
+from rols import uris
 
 
 @unix_only

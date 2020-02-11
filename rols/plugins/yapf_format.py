@@ -5,7 +5,7 @@ import os
 from yapf.yapflib import file_resources
 from yapf.yapflib.yapf_api import FormatCode
 
-from pyls import hookimpl
+from rols import hookimpl
 
 log = logging.getLogger(__name__)
 

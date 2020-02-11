@@ -2,7 +2,7 @@
 import logging
 from distutils.version import LooseVersion
 
-from pyls import _utils, hookimpl
+from rols import _utils, hookimpl
 
 log = logging.getLogger(__name__)
 

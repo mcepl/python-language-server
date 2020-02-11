@@ -4,10 +4,10 @@ import sys
 
 import pytest
 
-from pyls import uris
-from pyls.lsp import SymbolKind
-from pyls.plugins.symbols import pyls_document_symbols
-from pyls.workspace import Document
+from rols import uris
+from rols.lsp import SymbolKind
+from rols.plugins.symbols import pyls_document_symbols
+from rols.workspace import Document
 
 PY2 = sys.version[0] == "2"
 LINUX = sys.platform.startswith("linux")

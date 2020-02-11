@@ -1,7 +1,7 @@
 # Copyright 2017 Palantir Technologies, Inc.
-from pyls import uris
-from pyls.plugins.yapf_format import pyls_format_document, pyls_format_range
-from pyls.workspace import Document
+from rols import uris
+from rols.plugins.yapf_format import pyls_format_document, pyls_format_range
+from rols.workspace import Document
 
 DOC_URI = uris.from_fs_path(__file__)
 DOC = """A = [

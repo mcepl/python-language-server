@@ -1,6 +1,6 @@
 # Copyright 2017 Palantir Technologies, Inc.
 # pylint: disable=redefined-builtin, unused-argument
-from pyls import hookspec
+from rols import hookspec
 
 
 @hookspec

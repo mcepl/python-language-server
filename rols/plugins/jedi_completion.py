@@ -4,7 +4,7 @@ import os.path as osp
 
 import parso
 
-from pyls import _utils, hookimpl, lsp
+from rols import _utils, hookimpl, lsp
 
 log = logging.getLogger(__name__)
 

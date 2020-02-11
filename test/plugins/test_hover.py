@@ -1,8 +1,8 @@
 # Copyright 2017 Palantir Technologies, Inc.
 
-from pyls import uris
-from pyls.plugins.hover import pyls_hover
-from pyls.workspace import Document
+from rols import uris
+from rols.plugins.hover import pyls_hover
+from rols.workspace import Document
 
 DOC_URI = uris.from_fs_path(__file__)
 DOC = """

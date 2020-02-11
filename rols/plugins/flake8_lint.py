@@ -6,7 +6,7 @@ import re
 from os import path
 from subprocess import PIPE, Popen
 
-from pyls import hookimpl, lsp
+from rols import hookimpl, lsp
 
 log = logging.getLogger(__name__)
 FIX_IGNORES_RE = re.compile(r'([^a-zA-Z0-9_,]*;.*(\W+||$))')

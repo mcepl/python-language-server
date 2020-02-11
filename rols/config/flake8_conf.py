@@ -2,7 +2,7 @@
 import logging
 import os
 
-from pyls._utils import find_parents
+from rols._utils import find_parents
 
 from .source import ConfigSource
 

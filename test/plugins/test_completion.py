@@ -4,8 +4,8 @@ import sys
 
 import pytest
 
-from pyls import uris, lsp
-from pyls.workspace import Document
+from rols import uris, lsp
+from rols.workspace import Document
 
 PY2 = sys.version[0] == "2"
 LINUX = sys.platform.startswith("linux")

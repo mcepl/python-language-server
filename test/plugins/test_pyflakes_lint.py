@@ -1,7 +1,7 @@
 # Copyright 2017 Palantir Technologies, Inc.
-from pyls import lsp, uris
-from pyls.plugins import pyflakes_lint
-from pyls.workspace import Document
+from rols import lsp, uris
+from rols.plugins import pyflakes_lint
+from rols.workspace import Document
 
 DOC_URI = uris.from_fs_path(__file__)
 DOC = """import sys

@@ -4,7 +4,7 @@ import logging
 
 import mccabe
 
-from pyls import hookimpl, lsp
+from rols import hookimpl, lsp
 
 log = logging.getLogger(__name__)
 

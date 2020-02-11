@@ -1,9 +1,9 @@
 # Copyright 2017 Palantir Technologies, Inc.
 import os
 
-from pyls import lsp, uris
-from pyls.plugins import pydocstyle_lint
-from pyls.workspace import Document
+from rols import lsp, uris
+from rols.plugins import pydocstyle_lint
+from rols.workspace import Document
 
 DOC_URI = uris.from_fs_path(os.path.join(os.path.dirname(__file__), "pydocstyle.py"))
 TEST_DOC_URI = uris.from_fs_path(__file__)

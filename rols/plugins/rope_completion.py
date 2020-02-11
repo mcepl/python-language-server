@@ -3,7 +3,7 @@ import logging
 
 from rope.contrib.codeassist import code_assist, sorted_proposals
 
-from pyls import hookimpl, lsp
+from rols import hookimpl, lsp
 
 log = logging.getLogger(__name__)
 

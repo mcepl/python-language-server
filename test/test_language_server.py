@@ -10,7 +10,7 @@ from pyls_jsonrpc.exceptions import JsonRpcMethodNotFound
 import pytest
 from pyls_jsonrpc.exceptions import JsonRpcMethodNotFound
 
-from pyls.python_ls import RopeLanguageServer, start_io_lang_server
+from rols.python_ls import RopeLanguageServer, start_io_lang_server
 
 CALL_TIMEOUT = 10
 PY2 = sys.version_info[0] == 2
