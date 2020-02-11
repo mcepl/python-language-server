@@ -1,6 +1,6 @@
 # Copyright 2017 Palantir Technologies, Inc.
 from rols import uris
-from rols.plugins.definition import pyls_definitions
+from rols.plugins.definition import rols_definitions
 from rols.workspace import Document
 
 DOC_URI = uris.from_fs_path(__file__)
@@ -30,7 +30,7 @@ def test_definitions(config, workspace):
     }
 
     doc = Document(DOC_URI, workspace, DOC)
-    assert [{'uri': DOC_URI, 'range': def_range}] == pyls_definitions(config, doc, cursor_pos)
+    assert [{'uri': DOC_URI, 'range': def_range}] == rols_definitions(config, doc, cursor_pos)
 
 
 def test_builtin_definition(config, workspace):
@@ -39,7 +39,7 @@ def test_builtin_definition(config, workspace):
 
     # No go-to def for builtins
     doc = Document(DOC_URI, workspace, DOC)
-    assert not pyls_definitions(config, doc, cursor_pos)
+    assert not rols_definitions(config, doc, cursor_pos)
 
 
 def test_assignment(config, workspace):
@@ -53,4 +53,4 @@ def test_assignment(config, workspace):
     }
 
     doc = Document(DOC_URI, workspace, DOC)
-    assert [{'uri': DOC_URI, 'range': def_range}] == pyls_definitions(config, doc, cursor_pos)
+    assert [{'uri': DOC_URI, 'range': def_range}] == rols_definitions(config, doc, cursor_pos)

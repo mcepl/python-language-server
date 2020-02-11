@@ -13,7 +13,7 @@ IDENTATION_REGEX = re.compile(r"(\s+).+")
 
 
 @hookimpl
-def pyls_folding_range(document):
+def rols_folding_range(document):
     program = document.source + "\n"
     lines = program.splitlines()
     tree = parso.parse(program)

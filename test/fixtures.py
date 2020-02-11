@@ -19,11 +19,10 @@ def main():
 
 
 @pytest.fixture
-def pyls(tmpdir):
+def rols(tmpdir):
     """ Return an initialized python LS """
     ls = RopeLanguageServer(StringIO, StringIO)
 
-    breakpoint()
     ls.m_initialize(
         processId=1, rootUri=uris.from_fs_path(str(tmpdir)), initializationOptions={}
     )

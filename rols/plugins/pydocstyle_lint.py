@@ -20,13 +20,13 @@ DEFAULT_MATCH_DIR_RE = pydocstyle.config.ConfigurationParser.DEFAULT_MATCH_DIR_R
 
 
 @hookimpl
-def pyls_settings():
+def rols_settings():
     # Default pydocstyle to disabled
     return {"plugins": {"pydocstyle": {"enabled": False}}}
 
 
 @hookimpl
-def pyls_lint(config, document):
+def rols_lint(config, document):
     settings = config.plugin_settings("pydocstyle")
     log.debug("Got pydocstyle settings: %s", settings)
 
@@ -59,7 +59,7 @@ def pyls_lint(config, document):
 
     conf = pydocstyle.config.ConfigurationParser()
     with _patch_sys_argv(args):
-        # TODO(gatesn): We can add more pydocstyle args here from our pyls config
+        # TODO(gatesn): We can add more pydocstyle args here from our rols config
         conf.parse()
 
     # Will only yield a single filename, the document path

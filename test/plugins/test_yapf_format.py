@@ -1,6 +1,6 @@
 # Copyright 2017 Palantir Technologies, Inc.
 from rols import uris
-from rols.plugins.yapf_format import pyls_format_document, pyls_format_range
+from rols.plugins.yapf_format import rols_format_document, rols_format_range
 from rols.workspace import Document
 
 DOC_URI = uris.from_fs_path(__file__)
@@ -21,7 +21,7 @@ GOOD_DOC = """A = ['hello', 'world']\n"""
 
 def test_format(workspace):
     doc = Document(DOC_URI, workspace, DOC)
-    res = pyls_format_document(doc)
+    res = rols_format_document(doc)
 
     assert len(res) == 1
     assert res[0]["newText"] == "A = ['h', 'w', 'a']\n\nB = ['h', 'w']\n"
@@ -34,7 +34,7 @@ def test_range_format(workspace):
         "start": {"line": 0, "character": 0},
         "end": {"line": 4, "character": 10},
     }
-    res = pyls_format_range(doc, def_range)
+    res = rols_format_range(doc, def_range)
 
     assert len(res) == 1
 
@@ -44,7 +44,7 @@ def test_range_format(workspace):
 
 def test_no_change(workspace):
     doc = Document(DOC_URI, workspace, GOOD_DOC)
-    assert not pyls_format_document(doc)
+    assert not rols_format_document(doc)
 
 
 def test_config_file(tmpdir, workspace):
@@ -56,6 +56,6 @@ def test_config_file(tmpdir, workspace):
 
     # A was split on multiple lines because of column_limit from config file
     assert (
-        pyls_format_document(doc)[0]["newText"]
+        rols_format_document(doc)[0]["newText"]
         == "A = [\n    'h', 'w',\n    'a'\n]\n\nB = ['h', 'w']\n"
     )

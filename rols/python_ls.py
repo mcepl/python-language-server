@@ -182,7 +182,7 @@ class RopeLanguageServer(MethodDispatcher):
             "documentSymbolProvider": True,
             "definitionProvider": True,
             "executeCommandProvider": {
-                "commands": flatten(self._hook("pyls_commands"))
+                "commands": flatten(self._hook("rols_commands"))
             },
             "hoverProvider": True,
             "referencesProvider": True,
@@ -197,7 +197,7 @@ class RopeLanguageServer(MethodDispatcher):
             "workspace": {
                 "workspaceFolders": {"supported": True, "changeNotifications": True}
             },
-            "experimental": merge(self._hook("pyls_experimental_capabilities")),
+            "experimental": merge(self._hook("rols_experimental_capabilities")),
         }
         log.info("Server capabilities: %s", server_capabilities)
         return server_capabilities
@@ -230,8 +230,8 @@ class RopeLanguageServer(MethodDispatcher):
         )
         self.workspace = Workspace(rootUri, self._endpoint, self.config)
         self.workspaces[rootUri] = self.workspace
-        self._dispatchers = self._hook("pyls_dispatchers")
-        self._hook("pyls_initialize")
+        self._dispatchers = self._hook("rols_dispatchers")
+        self._hook("rols_initialize")
 
         if (
             self._check_parent_process
@@ -258,43 +258,43 @@ class RopeLanguageServer(MethodDispatcher):
         return {"capabilities": self.capabilities()}
 
     def m_initialized(self, **_kwargs):
-        self._hook("pyls_initialized")
+        self._hook("rols_initialized")
 
     def code_actions(self, doc_uri, range, context):
         return flatten(
-            self._hook("pyls_code_actions", doc_uri, range=range, context=context)
+            self._hook("rols_code_actions", doc_uri, range=range, context=context)
         )
 
     def code_lens(self, doc_uri):
-        return flatten(self._hook("pyls_code_lens", doc_uri))
+        return flatten(self._hook("rols_code_lens", doc_uri))
 
     def completions(self, doc_uri, position):
-        completions = self._hook("pyls_completions", doc_uri, position=position)
+        completions = self._hook("rols_completions", doc_uri, position=position)
         return {"isIncomplete": False, "items": flatten(completions)}
 
     def definitions(self, doc_uri, position):
-        return flatten(self._hook("pyls_definitions", doc_uri, position=position))
+        return flatten(self._hook("rols_definitions", doc_uri, position=position))
 
     def document_symbols(self, doc_uri):
-        return flatten(self._hook("pyls_document_symbols", doc_uri))
+        return flatten(self._hook("rols_document_symbols", doc_uri))
 
     def execute_command(self, command, arguments):
-        return self._hook("pyls_execute_command", command=command, arguments=arguments)
+        return self._hook("rols_execute_command", command=command, arguments=arguments)
 
     def format_document(self, doc_uri):
-        return self._hook("pyls_format_document", doc_uri)
+        return self._hook("rols_format_document", doc_uri)
 
     def format_range(self, doc_uri, range):
-        return self._hook("pyls_format_range", doc_uri, range=range)
+        return self._hook("rols_format_range", doc_uri, range=range)
 
     def highlight(self, doc_uri, position):
         return (
-            flatten(self._hook("pyls_document_highlight", doc_uri, position=position))
+            flatten(self._hook("rols_document_highlight", doc_uri, position=position))
             or None
         )
 
     def hover(self, doc_uri, position):
-        return self._hook("pyls_hover", doc_uri, position=position) or {"contents": ""}
+        return self._hook("rols_hover", doc_uri, position=position) or {"contents": ""}
 
     @_utils.debounce(LINT_DEBOUNCE_S, keyed_by="doc_uri")
     def lint(self, doc_uri, is_saved):
@@ -302,13 +302,13 @@ class RopeLanguageServer(MethodDispatcher):
         workspace = self._match_uri_to_workspace(doc_uri)
         if doc_uri in workspace.documents:
             workspace.publish_diagnostics(
-                doc_uri, flatten(self._hook("pyls_lint", doc_uri, is_saved=is_saved))
+                doc_uri, flatten(self._hook("rols_lint", doc_uri, is_saved=is_saved))
             )
 
     def references(self, doc_uri, position, exclude_declaration):
         return flatten(
             self._hook(
-                "pyls_references",
+                "rols_references",
                 doc_uri,
                 position=position,
                 exclude_declaration=exclude_declaration,
@@ -316,13 +316,13 @@ class RopeLanguageServer(MethodDispatcher):
         )
 
     def rename(self, doc_uri, position, new_name):
-        return self._hook("pyls_rename", doc_uri, position=position, new_name=new_name)
+        return self._hook("rols_rename", doc_uri, position=position, new_name=new_name)
 
     def signature_help(self, doc_uri, position):
-        return self._hook("pyls_signature_help", doc_uri, position=position)
+        return self._hook("rols_signature_help", doc_uri, position=position)
 
     def folding(self, doc_uri):
-        return self._hook("pyls_folding_range", doc_uri)
+        return self._hook("rols_folding_range", doc_uri)
 
     def m_text_document__did_close(self, textDocument=None, **_kwargs):
         workspace = self._match_uri_to_workspace(textDocument["uri"])
@@ -335,7 +335,7 @@ class RopeLanguageServer(MethodDispatcher):
             textDocument["text"],
             version=textDocument.get("version"),
         )
-        self._hook("pyls_document_did_open", textDocument["uri"])
+        self._hook("rols_document_did_open", textDocument["uri"])
         self.lint(textDocument["uri"], is_saved=True)
 
     def m_text_document__did_change(
@@ -406,7 +406,7 @@ class RopeLanguageServer(MethodDispatcher):
         return self.signature_help(textDocument["uri"], position)
 
     def m_workspace__did_change_configuration(self, settings=None):
-        self.config.update((settings or {}).get("pyls", {}))
+        self.config.update((settings or {}).get("rols", {}))
         for workspace_uri in self.workspaces:
             workspace = self.workspaces[workspace_uri]
             workspace.update_config(settings)

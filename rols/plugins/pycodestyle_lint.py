@@ -20,7 +20,7 @@ log = logging.getLogger(__name__)
 
 
 @hookimpl
-def pyls_lint(workspace, document):
+def rols_lint(workspace, document):
     config = workspace._config
     settings = config.plugin_settings('pycodestyle', document_path=document.path)
     log.debug("Got pycodestyle settings: %s", settings)

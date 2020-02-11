@@ -3,7 +3,7 @@
 from textwrap import dedent
 
 from rols import uris
-from rols.plugins.folding import pyls_folding_range
+from rols.plugins.folding import rols_folding_range
 from rols.workspace import Document
 
 DOC_URI = uris.from_fs_path(__file__)
@@ -116,7 +116,7 @@ for i in range(0, 3)
 
 def test_folding(workspace):
     doc = Document(DOC_URI, workspace, DOC)
-    ranges = pyls_folding_range(doc)
+    ranges = rols_folding_range(doc)
     expected = [
         {"startLine": 1, "endLine": 6},
         {"startLine": 2, "endLine": 3},
@@ -156,7 +156,7 @@ def test_folding(workspace):
 
 def test_folding_syntax_error(workspace):
     doc = Document(DOC_URI, workspace, SYNTAX_ERR)
-    ranges = pyls_folding_range(doc)
+    ranges = rols_folding_range(doc)
     expected = [
         {"startLine": 1, "endLine": 6},
         {"startLine": 2, "endLine": 3},

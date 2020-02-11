@@ -1,7 +1,7 @@
 # Copyright 2017 Palantir Technologies, Inc.
 from rols import uris
-from rols.plugins.autopep8_format import (pyls_format_document,
-                                          pyls_format_range)
+from rols.plugins.autopep8_format import (rols_format_document,
+                                          rols_format_range)
 from rols.workspace import Document
 
 DOC_URI = uris.from_fs_path(__file__)
@@ -51,7 +51,7 @@ def test_range_format(config, workspace):
         "start": {"line": 0, "character": 0},
         "end": {"line": 2, "character": 0},
     }
-    res = pyls_format_range(config, doc, def_range)
+    res = rols_format_range(config, doc, def_range)
 
     assert len(res) == 1
 

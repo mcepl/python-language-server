@@ -56,7 +56,7 @@ MODULES = [
 
 
 @hookimpl
-def pyls_settings():
+def rols_settings():
     # Setup default modules to preload, and rope extension modules
     return {
         "plugins": {"preload": {"modules": MODULES}},
@@ -65,7 +65,7 @@ def pyls_settings():
 
 
 @hookimpl
-def pyls_initialize(config):
+def rols_initialize(config):
     for mod_name in config.plugin_settings("preload").get("modules", []):
         try:
             __import__(mod_name)

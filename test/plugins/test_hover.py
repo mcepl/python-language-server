@@ -1,7 +1,7 @@
 # Copyright 2017 Palantir Technologies, Inc.
 
 from rols import uris
-from rols.plugins.hover import pyls_hover
+from rols.plugins.hover import rols_hover
 from rols.workspace import Document
 
 DOC_URI = uris.from_fs_path(__file__)
@@ -64,6 +64,6 @@ def test_hover(workspace):
     else:
         contents = "main()\n\nhello world"
 
-    assert {"contents": contents} == pyls_hover(doc, hov_position)
+    assert {"contents": contents} == rols_hover(doc, hov_position)
 
-    assert {"contents": ""} == pyls_hover(doc, no_hov_position)
+    assert {"contents": ""} == rols_hover(doc, no_hov_position)

@@ -6,7 +6,7 @@ log = logging.getLogger(__name__)
 
 
 @hookimpl
-def pyls_references(document, position, exclude_declaration=False):
+def rols_references(document, position, exclude_declaration=False):
     code_position = _utils.position_to_jedi_linecolumn(document, position)
     usages = document.jedi_script().get_references(**code_position)
 

@@ -51,7 +51,7 @@ _ERRORS = ("error_node",)
 
 
 @hookimpl
-def pyls_completions(config, document, position):
+def rols_completions(config, document, position):
     """Get formatted completions for current code position"""
     settings = config.plugin_settings('jedi_completion', document_path=document.path)
     code_position = _utils.position_to_jedi_linecolumn(document, position)

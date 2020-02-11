@@ -4,7 +4,7 @@ import logging
 import pkg_resources
 import pluggy
 
-from rols import PYLS, _utils, hookspecs, uris
+from rols import ROLS, _utils, hookspecs, uris
 
 try:
     from functools import lru_cache
@@ -44,7 +44,7 @@ class Config(object):
         except ImportError:
             pass
 
-        self._pm = pluggy.PluginManager(PYLS)
+        self._pm = pluggy.PluginManager(ROLS)
         self._pm.trace.root.setwriter(log.debug)
         self._pm.enable_tracing()
         self._pm.add_hookspecs(hookspecs)
@@ -52,23 +52,23 @@ class Config(object):
         # Pluggy will skip loading a plugin if it throws a DistributionNotFound exception.
         # However I don't want all plugins to have to catch ImportError and re-throw. So here we'll filter
         # out any entry points that throw ImportError assuming one or more of their dependencies isn't present.
-        for entry_point in pkg_resources.iter_entry_points(PYLS):
+        for entry_point in pkg_resources.iter_entry_points(ROLS):
             try:
                 entry_point.load()
             except ImportError as e:
                 log.warning(
-                    "Failed to load %s entry point '%s': %s", PYLS, entry_point.name, e
+                    "Failed to load %s entry point '%s': %s", ROLS, entry_point.name, e
                 )
                 self._pm.set_blocked(entry_point.name)
 
         # Load the entry points into pluggy, having blocked any failing ones
-        self._pm.load_setuptools_entrypoints(PYLS)
+        self._pm.load_setuptools_entrypoints(ROLS)
 
         for name, plugin in self._pm.list_name_plugin():
             if plugin is not None:
-                log.info("Loaded pyls plugin %s from %s", name, plugin)
+                log.info("Loaded rols plugin %s from %s", name, plugin)
 
-        for plugin_conf in self._pm.hook.pyls_settings(config=self):
+        for plugin_conf in self._pm.hook.rols_settings(config=self):
             self._plugin_settings = _utils.merge_dicts(
                 self._plugin_settings, plugin_conf
             )

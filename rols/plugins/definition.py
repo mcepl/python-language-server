@@ -6,7 +6,7 @@ log = logging.getLogger(__name__)
 
 
 @hookimpl
-def pyls_definitions(config, document, position):
+def rols_definitions(config, document, position):
     settings = config.plugin_settings('jedi_definition')
     code_position = _utils.position_to_jedi_linecolumn(document, position)
     definitions = document.jedi_script().goto(

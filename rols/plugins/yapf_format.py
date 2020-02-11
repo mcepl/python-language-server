@@ -11,12 +11,12 @@ log = logging.getLogger(__name__)
 
 
 @hookimpl
-def pyls_format_document(document):
+def rols_format_document(document):
     return _format(document)
 
 
 @hookimpl
-def pyls_format_range(document, range):  # pylint: disable=redefined-builtin
+def rols_format_range(document, range):  # pylint: disable=redefined-builtin
     # First we 'round' the range up/down to full lines only
     range["start"]["character"] = 0
     range["end"]["line"] += 1

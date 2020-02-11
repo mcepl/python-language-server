@@ -37,9 +37,9 @@ If you get an error similar to ``'install_requires' must be a string or list of 
 ~~~~~~~~~~~~~~~~~
 Installing these plugins will add extra functionality to the language server:
 
-* pyls-mypy_ Mypy type checking for Python 3
-* pyls-isort_ Isort import sort code formatting
-* pyls-black_ for code formatting using Black_
+* rols-mypy_ Mypy type checking for Python 3
+* rols-isort_ Isort import sort code formatting
+* rols-black_ for code formatting using Black_
 
 Please see the above repositories for examples on how to write plugins for the Python Language Server. Please file an
 issue if you require assistance writing a plugin.
@@ -52,7 +52,7 @@ Configuration is loaded from zero or more configuration sources. Currently imple
 * pycodestyle: discovered in ~/.config/pycodestyle, setup.cfg, tox.ini and pycodestyle.cfg.
 * flake8: discovered in ~/.config/flake8, setup.cfg, tox.ini and flake8.cfg
 
-The default configuration source is pycodestyle. Change the `pyls.configurationSources` setting to `['flake8']` in
+The default configuration source is pycodestyle. Change the `rols.configurationSources` setting to `['flake8']` in
 order to respect flake8 configuration instead.
 
 Overall configuration is computed first from user configuration (in home directory), overridden by configuration
@@ -60,7 +60,7 @@ passed in by the language client, and then overriden by configuration discovered
 
 To enable pydocstyle for linting docstrings add the following setting in your LSP configuration:
 ```
-"pyls.plugins.pydocstyle.enabled": true
+"rols.plugins.pydocstyle.enabled": true
 ```
 
 See `vscode-client/package.json`_ for the full set of supported configuration options.
@@ -123,7 +123,7 @@ This project is made available under the MIT License.
 .. _pydocstyle: https://github.com/PyCQA/pydocstyle
 .. _YAPF: https://github.com/google/yapf
 .. _autopep8: https://github.com/hhatto/autopep8
-.. _pyls-mypy: https://github.com/tomv564/pyls-mypy
-.. _pyls-isort: https://github.com/paradoxxxzero/pyls-isort
-.. _pyls-black: https://github.com/rupert/pyls-black
+.. _rols-mypy: https://github.com/tomv564/rols-mypy
+.. _rols-isort: https://github.com/paradoxxxzero/rols-isort
+.. _rols-black: https://github.com/rupert/rols-black
 .. _Black: https://github.com/ambv/black

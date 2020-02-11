@@ -9,7 +9,7 @@ log = logging.getLogger(__name__)
 
 
 @hookimpl
-def pyls_document_symbols(config, document):
+def rols_document_symbols(config, document):
     # pylint: disable=broad-except
     # pylint: disable=too-many-nested-blocks
     # pylint: disable=too-many-locals

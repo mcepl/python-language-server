@@ -6,7 +6,7 @@ import pytest
 
 from rols import uris
 from rols.lsp import SymbolKind
-from rols.plugins.symbols import pyls_document_symbols
+from rols.plugins.symbols import rols_document_symbols
 from rols.workspace import Document
 
 PY2 = sys.version[0] == "2"
@@ -49,7 +49,7 @@ def helper_check_symbols_all_scope(symbols):
 def test_symbols(config, workspace):
     doc = Document(DOC_URI, workspace, DOC)
     config.update({'plugins': {'jedi_symbols': {'all_scopes': False}}})
-    symbols = pyls_document_symbols(config, doc)
+    symbols = rols_document_symbols(config, doc)
 
     # All four symbols (import sys, a, B, main)
     # y is not in the root scope, it shouldn't be returned
@@ -73,7 +73,7 @@ def test_symbols(config, workspace):
 
 def test_symbols_all_scopes(config, workspace):
     doc = Document(DOC_URI, workspace, DOC)
-    symbols = pyls_document_symbols(config, doc)
+    symbols = rols_document_symbols(config, doc)
     helper_check_symbols_all_scope(symbols)
 
 
@@ -83,7 +83,7 @@ def test_symbols_all_scopes_with_jedi_environment(workspace):
 
     # Update config extra environment
     env_path = '/tmp/pyenv/bin/python'
-    settings = {'pyls': {'plugins': {'jedi': {'environment': env_path}}}}
+    settings = {'rols': {'plugins': {'jedi': {'environment': env_path}}}}
     doc.update_config(settings)
-    symbols = pyls_document_symbols(doc._config, doc)
+    symbols = rols_document_symbols(doc._config, doc)
     helper_check_symbols_all_scope(symbols)

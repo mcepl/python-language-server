@@ -13,13 +13,13 @@ FIX_IGNORES_RE = re.compile(r'([^a-zA-Z0-9_,]*;.*(\W+||$))')
 
 
 @hookimpl
-def pyls_settings():
+def rols_settings():
     # Default flake8 to disabled
     return {"plugins": {"flake8": {"enabled": False}}}
 
 
 @hookimpl
-def pyls_lint(workspace, document):
+def rols_lint(workspace, document):
     config = workspace._config
     settings = config.plugin_settings('flake8', document_path=document.path)
     log.debug("Got flake8 settings: %s", settings)

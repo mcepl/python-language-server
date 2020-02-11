@@ -4,17 +4,17 @@ from rols import hookspec
 
 
 @hookspec
-def pyls_code_actions(config, workspace, document, range, context):
+def rols_code_actions(config, workspace, document, range, context):
     pass
 
 
 @hookspec
-def pyls_code_lens(config, workspace, document):
+def rols_code_lens(config, workspace, document):
     pass
 
 
 @hookspec
-def pyls_commands(config, workspace):
+def rols_commands(config, workspace):
     """The list of command strings supported by the server.
 
     Returns:
@@ -23,100 +23,100 @@ def pyls_commands(config, workspace):
 
 
 @hookspec
-def pyls_completions(config, workspace, document, position):
+def rols_completions(config, workspace, document, position):
     pass
 
 
 @hookspec
-def pyls_definitions(config, workspace, document, position):
+def rols_definitions(config, workspace, document, position):
     pass
 
 
 @hookspec
-def pyls_dispatchers(config, workspace):
+def rols_dispatchers(config, workspace):
     pass
 
 
 @hookspec
-def pyls_document_did_open(config, workspace, document):
+def rols_document_did_open(config, workspace, document):
     pass
 
 
 @hookspec
-def pyls_document_did_save(config, workspace, document):
+def rols_document_did_save(config, workspace, document):
     pass
 
 
 @hookspec
-def pyls_document_highlight(config, workspace, document, position):
+def rols_document_highlight(config, workspace, document, position):
     pass
 
 
 @hookspec
-def pyls_document_symbols(config, workspace, document):
+def rols_document_symbols(config, workspace, document):
     pass
 
 
 @hookspec(firstresult=True)
-def pyls_execute_command(config, workspace, command, arguments):
+def rols_execute_command(config, workspace, command, arguments):
     pass
 
 
 @hookspec
-def pyls_experimental_capabilities(config, workspace):
+def rols_experimental_capabilities(config, workspace):
     pass
 
 
 @hookspec(firstresult=True)
-def pyls_folding_range(config, workspace, document):
+def rols_folding_range(config, workspace, document):
     pass
 
 
 @hookspec(firstresult=True)
-def pyls_format_document(config, workspace, document):
+def rols_format_document(config, workspace, document):
     pass
 
 
 @hookspec(firstresult=True)
-def pyls_format_range(config, workspace, document, range):
+def rols_format_range(config, workspace, document, range):
     pass
 
 
 @hookspec(firstresult=True)
-def pyls_hover(config, workspace, document, position):
+def rols_hover(config, workspace, document, position):
     pass
 
 
 @hookspec
-def pyls_initialize(config, workspace):
+def rols_initialize(config, workspace):
     pass
 
 
 @hookspec
-def pyls_initialized():
+def rols_initialized():
     pass
 
 
 @hookspec
-def pyls_lint(config, workspace, document, is_saved):
+def rols_lint(config, workspace, document, is_saved):
     pass
 
 
 @hookspec
-def pyls_references(config, workspace, document, position, exclude_declaration):
+def rols_references(config, workspace, document, position, exclude_declaration):
     pass
 
 
 @hookspec(firstresult=True)
-def pyls_rename(config, workspace, document, position, new_name):
+def rols_rename(config, workspace, document, position, new_name):
     pass
 
 
 @hookspec
-def pyls_settings(config):
+def rols_settings(config):
     pass
 
 
 @hookspec(firstresult=True)
-def pyls_signature_help(config, workspace, document, position):
+def rols_signature_help(config, workspace, document, position):
     pass

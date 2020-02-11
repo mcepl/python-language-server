@@ -9,13 +9,13 @@ log = logging.getLogger(__name__)
 
 
 @hookimpl
-def pyls_settings():
+def rols_settings():
     # Default rope_completion to disabled
     return {"plugins": {"rope_completion": {"enabled": False}}}
 
 
 @hookimpl
-def pyls_completions(config, workspace, document, position):
+def rols_completions(config, workspace, document, position):
     # Rope is a bit rubbish at completing module imports, so we'll return None
     word = document.word_at_position(
         {

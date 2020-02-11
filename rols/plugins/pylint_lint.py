@@ -19,13 +19,13 @@ class PylintLinter(object):
 
     @classmethod
     def lint(cls, document, is_saved, flags=""):
-        """Plugin interface to pyls linter.
+        """Plugin interface to rols linter.
 
         Args:
             document: The document to be linted.
             is_saved: Whether or not the file has been saved to disk.
             flags: Additional flags to pass to pylint. Not exposed to
-                pyls_lint, but used for testing.
+                rols_lint, but used for testing.
 
         Returns:
             A list of dicts with the following format:
@@ -102,7 +102,7 @@ class PylintLinter(object):
         #  * warning
         diagnostics = []
         for diag in json.loads(json_out):
-            # pylint lines index from 1, pyls lines index from 0
+            # pylint lines index from 1, rols lines index from 0
             line = diag["line"] - 1
 
             err_range = {
@@ -152,7 +152,7 @@ def _build_pylint_flags(settings):
 
 
 @hookimpl
-def pyls_settings():
+def rols_settings():
     # Default pylint to disabled because it requires a config
     # file to be useful.
     return {'plugins': {'pylint': {
@@ -164,7 +164,7 @@ def pyls_settings():
 
 
 @hookimpl
-def pyls_lint(config, document, is_saved):
+def rols_lint(config, document, is_saved):
     """Run pylint linter."""
     settings = config.plugin_settings('pylint')
     log.debug("Got pylint settings: %s", settings)
