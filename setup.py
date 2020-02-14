@@ -90,7 +90,7 @@ setup(
             "folding = rols.plugins.folding",
             "flake8 = rols.plugins.flake8_lint",
             "jedi_completion = rols.plugins.jedi_completion",
-            "jedi_definition = rols.plugins.definition",
+            "jedi_definition = rols.plugins.jedi_definition",
             "jedi_hover = rols.plugins.hover",
             "jedi_highlight = rols.plugins.highlight",
             "jedi_references = rols.plugins.references",

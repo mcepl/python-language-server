@@ -1,6 +1,6 @@
 # Copyright 2017 Palantir Technologies, Inc.
 from rols import uris
-from rols.plugins.definition import rols_definitions
+from rols.plugins.jedi_definition import rols_definitions
 from rols.workspace import Document
 
 DOC_URI = uris.from_fs_path(__file__)
