@@ -43,10 +43,10 @@ jobs:
       - run: py.test -v test/
       - name: Pylint checks
         if: matrix.PYTHON_VERSION == '2.7'
-        run: pylint pyls test
+        run: pylint rols test
       - name: Code style checks
         if: matrix.PYTHON_VERSION == '2.7'
-        run: pycodestyle pyls test
+        run: pycodestyle rols test
       - name: Pyflakes checks
         if: matrix.PYTHON_VERSION == '2.7'
-        run: pyflakes pyls test
+        run: pyflakes rols test
