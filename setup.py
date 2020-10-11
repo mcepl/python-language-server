@@ -102,6 +102,7 @@ setup(
             "pydocstyle = rols.plugins.pydocstyle_lint",
             "pyflakes = rols.plugins.pyflakes_lint",
             "pylint = rols.plugins.pylint_lint",
+            "rope_definition = rols.plugins.rope_definition",
             "rope_completion = rols.plugins.rope_completion",
             "rope_rename = rols.plugins.rope_rename",
             "yapf = rols.plugins.yapf_format",
