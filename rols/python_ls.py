@@ -64,12 +64,8 @@ def start_tcp_lang_server(bind_addr, port, check_parent_process, handler_class):
     wrapper_class = type(
         handler_class.__name__ + "Handler",
         (_StreamHandlerWrapper,),
-        {
-            "DELEGATE_CLASS": partial(
-                handler_class, check_parent_process=check_parent_process
-            ),
+        {"DELEGATE_CLASS": partial(handler_class, check_parent_process=check_parent_process),
          'SHUTDOWN_CALL': partial(shutdown_server, check_parent_process)}
-        },
     )
 
     server = socketserver.TCPServer(
@@ -191,7 +187,7 @@ class RopeLanguageServer(MethodDispatcher):
             "signatureHelpProvider": {"triggerCharacters": ["(", ",", "="]},
             "textDocumentSync": {
                 "change": lsp.TextDocumentSyncKind.INCREMENTAL,
-                "save": {"includeText": True,},
+                "save": {"includeText": True},
                 "openClose": True,
             },
             "workspace": {

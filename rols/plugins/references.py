@@ -8,7 +8,7 @@ log = logging.getLogger(__name__)
 @hookimpl
 def rols_references(document, position, exclude_declaration=False):
     code_position = _utils.position_to_jedi_linecolumn(document, position)
-    usages = document.jedi_script().get_references(**code_position)
+    usages = document.rope_script().get_references(**code_position)
 
     if exclude_declaration:
         # Filter out if the usage is the actual declaration of the thing
@@ -21,6 +21,4 @@ def rols_references(document, position, exclude_declaration=False):
             'start': {'line': d.line - 1, 'character': d.column},
             'end': {'line': d.line - 1, 'character': d.column + len(d.name)}
         }
-        for d in usages
-        if not d.in_builtin_module()
-    ]
+    } for d in usages if not d.in_builtin_module()]

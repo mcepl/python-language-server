@@ -5,6 +5,7 @@ import pytest
 
 from rols import uris
 from rols.plugins.references import rols_references
+from rols.workspace import Document
 from rols._utils import PY2
 
 

@@ -8,7 +8,7 @@ log = logging.getLogger(__name__)
 @hookimpl
 def rols_document_highlight(document, position):
     code_position = _utils.position_to_jedi_linecolumn(document, position)
-    usages = document.jedi_script().get_references(**code_position)
+    usages = document.rope_script().get_references(**code_position)
 
     def is_valid(definition):
         return definition.line is not None and definition.column is not None

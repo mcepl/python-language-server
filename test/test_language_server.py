@@ -2,13 +2,11 @@
 import multiprocessing
 import os
 import time
-import multiprocessing
 import sys
 from threading import Thread
 
 from pyls_jsonrpc.exceptions import JsonRpcMethodNotFound
 import pytest
-from pyls_jsonrpc.exceptions import JsonRpcMethodNotFound
 
 from rols.python_ls import RopeLanguageServer, start_io_lang_server
 
@@ -39,7 +37,7 @@ class _ClientServer(object):
                 ParallelKind = multiprocessing.Process
 
         self.process = ParallelKind(target=start_io_lang_server, args=(
-            os.fdopen(csr, 'rb'), os.fdopen(scw, 'wb'), check_parent_process, PythonLanguageServer
+            os.fdopen(csr, 'rb'), os.fdopen(scw, 'wb'), check_parent_process, RopeLanguageServer
         ))
         self.process.start()
 

@@ -1,4 +1,5 @@
 # Copyright 2019 Palantir Technologies, Inc.
+import logging
 import os
 import tempfile
 
@@ -7,6 +8,7 @@ from rols import lsp, uris
 from rols.plugins import flake8_lint
 from rols.workspace import Document
 
+log = logging.getLogger(__name__)
 
 DOC_URI = uris.from_fs_path(__file__)
 DOC = """import rols
@@ -33,6 +35,7 @@ def test_flake8_unsaved(workspace):
     doc = Document('', workspace, DOC)
     diags = flake8_lint.rols_lint(workspace, doc)
     msg = 'local variable \'a\' is assigned to but never used'
+    log.debug('diags = %s (%s)', diags, type(diags))
     unused_var = [d for d in diags if d['message'] == msg][0]
 
     assert unused_var['source'] == 'flake8'

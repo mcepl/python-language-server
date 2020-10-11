@@ -3,6 +3,7 @@ import contextlib
 import os
 import tempfile
 
+from test import py2_only, py3_only, IS_PY3
 from rols import lsp, uris
 from rols.plugins import pylint_lint
 from rols.workspace import Document

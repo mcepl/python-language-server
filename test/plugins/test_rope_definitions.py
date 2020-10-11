@@ -19,7 +19,7 @@ class Directory(object):
 """
 
 
-def test_definitions(config):
+def test_definitions(config, workspace):
     # Over 'a' in print a
     cursor_pos = {"line": 3, "character": 6}
 
@@ -29,22 +29,22 @@ def test_definitions(config):
         "end": {"line": 0, "character": 5},
     }
 
-    doc = Document(DOC_URI, DOC)
+    doc = Document(DOC_URI, workspace, DOC)
     assert [{"uri": DOC_URI, "range": def_range}] == rols_definitions(
         config, doc, cursor_pos
     )
 
 
-def test_builtin_definition(config):
+def test_builtin_definition(config, workspace):
     # Over 'i' in dict
     cursor_pos = {"line": 8, "character": 24}
 
     # No go-to def for builtins
-    doc = Document(DOC_URI, DOC)
+    doc = Document(DOC_URI, workspace, DOC)
     assert not rols_definitions(config, doc, cursor_pos)
 
 
-def test_assignment(config):
+def test_assignment(config, workspace):
     # Over 's' in self.members[id]
     cursor_pos = {"line": 11, "character": 19}
 
@@ -54,7 +54,7 @@ def test_assignment(config):
         "end": {"line": 8, "character": 20},
     }
 
-    doc = Document(DOC_URI, DOC)
+    doc = Document(DOC_URI, workspace, DOC)
     assert [{"uri": DOC_URI, "range": def_range}] == rols_definitions(
         config, doc, cursor_pos
     )

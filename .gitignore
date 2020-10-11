@@ -54,6 +54,7 @@ coverage.xml
 .hypothesis/
 pytest.xml
 .pytest_cache/
+*-log.txt
 
 # Translations
 *.mo

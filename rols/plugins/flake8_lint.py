@@ -3,7 +3,7 @@
 import logging
 import os.path
 import re
-from os import path
+import sys
 from subprocess import PIPE, Popen
 
 from rols import hookimpl, lsp
@@ -70,8 +70,9 @@ def run_flake8(flake8_executable, args, document):
         cmd.extend(args)
         p = Popen(cmd, stdin=PIPE, stdout=PIPE, stderr=PIPE)
     except IOError:
-        log.debug("Can't execute %s. Trying with 'python -m flake8'", flake8_executable)
-        cmd = ['python', '-m', 'flake8']
+        log.debug("Can't execute %s. Trying with '%s -m flake8'",
+                  flake8_executable, sys.executable)
+        cmd = [sys.executable, '-m', 'flake8']
         cmd.extend(args)
         p = Popen(cmd, stdin=PIPE, stdout=PIPE, stderr=PIPE)
     (stdout, stderr) = p.communicate(document.source.encode())

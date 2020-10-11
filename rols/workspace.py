@@ -102,7 +102,7 @@ class Workspace(object):
         self._docs[doc_uri].version = version
 
     def update_config(self, settings):
-        self._config.update((settings or {}).get('pyls', {}))
+        self._config.update((settings or {}).get('rols', {}))
         for doc_uri in self.documents:
             self.get_document(doc_uri).update_config(settings)
 
@@ -184,7 +184,7 @@ class Document(object):
         return self._source
 
     def update_config(self, settings):
-        self._config.update((settings or {}).get('pyls', {}))
+        self._config.update((settings or {}).get('rols', {}))
 
     @lock
     def apply_change(self, change):
@@ -254,12 +254,12 @@ class Document(object):
 
     @lock
     def jedi_names(self, use_document_path, all_scopes=False, definitions=True, references=False):
-        script = self.jedi_script(use_document_path=use_document_path)
+        script = self.rope_script(use_document_path=use_document_path)
         return script.get_names(all_scopes=all_scopes, definitions=definitions,
                                 references=references)
 
     @lock
-    def jedi_script(self, position=None, use_document_path=False):
+    def rope_script(self, position=None, use_document_path=False):
         extra_paths = []
         environment_path = None
         env_vars = None
@@ -293,7 +293,7 @@ class Document(object):
 
         if position:
             # Deprecated by Jedi to use in Script() constructor
-            kwargs += _utils.position_to_jedi_linecolumn(self, position)
+            kwargs.update(_utils.position_to_jedi_linecolumn(self, position))
 
         return jedi.Script(**kwargs)
 

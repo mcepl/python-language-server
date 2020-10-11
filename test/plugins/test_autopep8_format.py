@@ -38,7 +38,7 @@ bar = {'foo': foo
 
 def test_format(config, workspace):
     doc = Document(DOC_URI, workspace, DOC)
-    res = pyls_format_document(config, doc)
+    res = rols_format_document(config, doc)
 
     assert len(res) == 1
     assert res[0]["newText"] == "a = 123\n\n\ndef func():\n    pass\n"
@@ -61,12 +61,12 @@ def test_range_format(config, workspace):
 
 def test_no_change(config, workspace):
     doc = Document(DOC_URI, workspace, GOOD_DOC)
-    assert not pyls_format_document(config, doc)
+    assert not rols_format_document(config, doc)
 
 
 def test_hanging_indentation(config, workspace):
     doc = Document(DOC_URI, workspace, INDENTED_DOC)
-    res = pyls_format_document(config, doc)
+    res = rols_format_document(config, doc)
 
     assert len(res) == 1
     assert res[0]['newText'] == CORRECT_INDENTED_DOC

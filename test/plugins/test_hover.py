@@ -1,6 +1,7 @@
 # Copyright 2017 Palantir Technologies, Inc.
+from distutils.version import LooseVersion
 
-from rols import uris
+from rols import uris, _utils
 from rols.plugins.hover import rols_hover
 from rols.workspace import Document
 
@@ -35,19 +36,19 @@ def test_numpy_hover(workspace):
     doc = Document(DOC_URI, workspace, NUMPY_DOC)
 
     contents = ''
-    assert contents in pyls_hover(doc, no_hov_position)['contents']
+    assert contents in rols_hover(doc, no_hov_position)['contents']
 
     contents = 'NumPy\n=====\n\nProvides\n'
-    assert contents in pyls_hover(doc, numpy_hov_position_1)['contents'][0]
+    assert contents in rols_hover(doc, numpy_hov_position_1)['contents'][0]
 
     contents = 'NumPy\n=====\n\nProvides\n'
-    assert contents in pyls_hover(doc, numpy_hov_position_2)['contents'][0]
+    assert contents in rols_hover(doc, numpy_hov_position_2)['contents'][0]
 
     contents = 'NumPy\n=====\n\nProvides\n'
-    assert contents in pyls_hover(doc, numpy_hov_position_3)['contents'][0]
+    assert contents in rols_hover(doc, numpy_hov_position_3)['contents'][0]
 
     contents = 'Trigonometric sine, element-wise.\n\n'
-    assert contents in pyls_hover(
+    assert contents in rols_hover(
         doc, numpy_sin_hov_position)['contents'][0]
 
 
